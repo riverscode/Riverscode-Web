@@ -25,11 +25,11 @@ type PostData = {
   frontMatter: {
     wordCount: number;
     readingTime: ReadTimeResults
-    slug: string;
+    slug: string | string[] | undefined;
   };
 }
 
-export async function getFilesBySlug(slug: string, type: string): Promise<PostData> {
+export async function getFilesBySlug(slug: string | string[] | undefined, type: string): Promise<PostData> {
   const filePath = path.join(root, "src", "data", type, `${slug}.mdx`);
   const mdxSource = fs.readFileSync(filePath, "utf-8");
 
