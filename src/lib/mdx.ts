@@ -21,7 +21,7 @@ export function getFiles(type: string) {
 }
 
 type PostData = {
-  source: MDXRemoteSerializeResult<Record<string, unknown>, Record<string, string>>;
+  source: MDXRemoteSerializeResult<Record<string, unknown>>;
   frontMatter: {
     wordCount: number;
     readingTime: ReadTimeResults
@@ -55,7 +55,7 @@ export async function getFilesBySlug(slug: string, type: string): Promise<PostDa
 export async function getFilesMetadata(type: string) {
   const files = getFiles(type);
 
-  return files.reduce((allPosts, postSlug) => {
+  return files.reduce((allPosts: any, postSlug) => {
     const mdxSource = fs.readFileSync(
       path.join(root, "src", "data", type, postSlug),
       "utf-8"
