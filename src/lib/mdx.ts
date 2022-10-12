@@ -2,9 +2,11 @@ import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
 import { serialize } from "next-mdx-remote/serialize";
+// @ts-ignore
 import mdxPrism from "mdx-prism";
 import remarkautolink from "remark-autolink-headings";
 import remarkslug from "remark-slug";
+// @ts-ignore
 import remarkcode from "remark-code-titles";
 import remarkGfm from "remark-gfm";
 import readingTime, { ReadTimeResults } from "reading-time";
