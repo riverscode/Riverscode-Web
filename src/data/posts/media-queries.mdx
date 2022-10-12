@@ -1,0 +1,77 @@
+---
+title: "Como usar medias queries en css"
+summary: "Aprende a usar medias queries en css para que tu página web se adapte a cualquier dispositivo."
+author: "Rivers Code"
+publishedAt: "2022-10-05"
+image: "css.png"
+tags:
+  - "🎀 CSS"
+---
+
+# Como usar medias queries en css
+
+Cuando diseñamos una página web, es importante que esta se adapte a cualquier dispositivo, ya sea un ordenador, un móvil o una tablet. Para ello, podemos usar las medias queries en css.
+
+## ¿Qué son las medias queries en css?
+
+Las medias queries en css son una forma de adaptar el diseño de nuestra página web a diferentes dispositivos. Para ello, podemos usar diferentes propiedades de css, como por ejemplo, el tamaño de la pantalla, la orientación, el ancho de la pantalla, etc.
+
+## ¿Cómo usar las medias queries en css?
+
+Para usar las medias queries en css, debemos usar la propiedad `@media` y dentro de ella, las propiedades que queramos usar. Por ejemplo, si queremos que el fondo de nuestra página sea rojo cuando la pantalla sea menor de 600px, podemos usar el siguiente código:
+
+```css
+@media (max-width: 600px) {
+  body {
+    background-color: red;
+  }
+}
+```
+
+En este caso, hemos usado la propiedad `max-width` para indicar que el fondo de la página será rojo cuando la pantalla sea menor de 600px. También podemos usar la propiedad `min-width` para indicar que el fondo de la página será rojo cuando la pantalla sea mayor de 600px.
+
+## ¿Qué otras propiedades podemos usar?
+
+Además de las propiedades `max-width` y `min-width`, podemos usar otras propiedades para indicar que el fondo de la página será rojo cuando la pantalla sea mayor o menor de un tamaño determinado. Por ejemplo, podemos usar la propiedad `max-height` para indicar que el fondo de la página será rojo cuando la altura de la pantalla sea menor de 600px. También podemos usar la propiedad `min-height` para indicar que el fondo de la página será rojo cuando la altura de la pantalla sea mayor de 600px.
+
+## ¿Cómo usar las medias queries en css con javascript?
+
+Si queremos usar las medias queries en css con javascript, podemos usar la propiedad `window.matchMedia`. Por ejemplo, si queremos que el fondo de nuestra página sea rojo cuando la pantalla sea menor de 600px, podemos usar el siguiente código:
+
+```js
+const mediaQuery = window.matchMedia('(max-width: 600px)')
+if (mediaQuery.matches) {
+  document.body.style.backgroundColor = 'red'
+}
+```
+
+En este caso, hemos usado la propiedad `window.matchMedia` para indicar que el fondo de la página será rojo cuando la pantalla sea menor de 600px. También podemos usar la propiedad `window.matchMedia` para indicar que el fondo de la página será rojo cuando la pantalla sea mayor de 600px.
+
+## ¿Cómo usar las medias queries en css con react?
+
+Si queremos usar las medias queries en css con react, podemos usar la propiedad `useMediaQuery`. Por ejemplo, si queremos que el fondo de nuestra página sea rojo cuando la pantalla sea menor de 600px, podemos usar el siguiente código:
+
+```js
+import { useMediaQuery } from 'react-responsive'
+
+const isMobile = useMediaQuery({ query: '(max-width: 600px)' })
+if (isMobile) {
+  document.body.style.backgroundColor = 'red'
+}
+```
+
+En este caso, hemos usado la propiedad `useMediaQuery` para indicar que el fondo de la página será rojo cuando la pantalla sea menor de 600px. También podemos usar la propiedad `useMediaQuery` para indicar que el fondo de la página será rojo cuando la pantalla sea mayor de 600px.
+
+Exiten otras propiedades que podemos usar con @media como por ejemplo:
+
+prefer-reduced-motion: para indicar que el usuario quiere que la página web no tenga animaciones.
+
+si usamos prefer-reduced-montion: reduce, podemos usar la propiedad animation-play-state: paused para que las animaciones de la página web no se reproduzcan. [Link a la documentación](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) [Link de block](https://web.dev/prefers-reduced-motion/)
+
+### Que es media query level 5
+
+Media query level 5 es una especificación de css que nos permite usar las medias queries en css. [Link a la documentación](https://www.w3.org/TR/mediaqueries-5/)
+
+
+
+

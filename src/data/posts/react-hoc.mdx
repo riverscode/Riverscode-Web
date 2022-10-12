@@ -1,0 +1,68 @@
+---
+title: "Como Funcionan los HOC en React"
+summary: "Aprende a usar medias queries en css para que tu página web se adapte a cualquier dispositivo."
+author: "Rivers Code"
+publishedAt: "2022-10-05"
+image: "react.png"
+tags:
+  - "🌌 React"
+references: 
+  - "https://reactjs.org/docs/higher-order-components.html"
+  - "https://www.youtube.com/watch?v=SZfsrlgwVT0"
+---
+Los High Order Components (HOC) son una forma de reutilizar código en React. En este artículo aprenderás a usarlos y a crear tus propios HOC.
+
+## ¿Qué son los High Order Components?
+
+Los High Order Components (HOC) son funciones que reciben un componente como parámetro y devuelven un nuevo componente. Los HOC son una forma de reutilizar código en React.
+
+## ¿Cómo se usan los High Order Components?
+
+Los HOC se usan para reutilizar código. Por ejemplo, si tienes un componente que se encarga de mostrar un mensaje de error, puedes crear un HOC que reciba el mensaje de error y devuelva un componente que muestre el mensaje de error.
+
+## Cuando no usar High Order Components
+
+Los HOC no son la solución a todos los problemas. Si tienes un componente que se encarga de mostrar un mensaje de error, no necesitas crear un HOC para reutilizar el código. Puedes crear un componente que se encargue de mostrar el mensaje de error y usarlo en todos los lugares donde necesites mostrar un mensaje de error.
+
+```jsx:WithConsoleLog.jsx
+import { useEffect } from "react";
+
+export const WithConsoleLog = (Component) => {
+  const WraperComponent = () => {
+    useEffect(() => {
+      console.log("Logica de HOC")
+    }, [])
+    return <Component />;
+  }
+
+  return WraperComponent;
+}
+```
+
+```jsx:ComponentA.jsx
+import { WithConsoleLog } from "./WithConsoleLog";
+
+export const ComponentA = () => {
+  return (
+    <div>
+      <h2>Component A</h2>
+    </div>
+  );
+}
+
+export const ComponentAWithConsoleLog = WithConsoleLog(ComponentA);
+```
+
+```jsx:ComponentB.jsx
+import { WithConsoleLog } from "./WithConsoleLog";
+
+export const ComponentA = () => {
+  return (
+    <div>
+      <h2>Component B</h2>
+    </div>
+  );
+}
+
+export const ComponentBWithConsoleLog = WithConsoleLog(ComponentB);
+```

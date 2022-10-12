@@ -1,0 +1,211 @@
+code {
+  white-space: pre;
+}
+code[class*="language-"],
+pre[class*="language-"] {
+  position: relative;
+  color: #f92aad;
+  text-shadow: 0 0 2px #100c0f, 0 0 5px #dc078e33, 0 0 10px #fff3;
+  background: none;
+  font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+  font-size: 1em;
+  text-align: left;
+  white-space: pre;
+  word-spacing: normal;
+  word-break: normal;
+  word-wrap: normal;
+  line-height: 1.5;
+
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+  tab-size: 4;
+
+  -webkit-hyphens: none;
+  -moz-hyphens: none;
+  -ms-hyphens: none;
+  hyphens: none;
+}
+/* Code blocks */
+pre[class*="language-"] {
+  padding: 1em;
+  /* overflow: auto; */
+}
+:not(pre) > code[class*="language-"],
+pre[class*="language-"] {
+  background: rgb(0, 15, 6);
+  border: 1px solid #1e1e3f;
+}
+/* Inline code */
+:not(pre) > code[class*="language-"] {
+  padding: 0.1em;
+  white-space: normal;
+}
+.token {
+  font-weight: 400;
+}
+
+.token.comment,
+.token.prolog,
+.token.cdata {
+  color: #b362ff;
+}
+
+.token.delimiter,
+.token.keyword,
+.token.selector,
+.token.important,
+.token.atrule {
+  color: #ff9d00;
+}
+
+.token.operator,
+.token.attr-name {
+  color: rgb(255, 180, 84);
+}
+
+.token.punctuation {
+  color: #ffffff;
+}
+
+.token.boolean {
+  color: rgb(255, 98, 140);
+}
+
+.token.tag,
+.token.tag .punctuation,
+.token.doctype,
+.token.builtin {
+  color: rgb(255, 157, 0);
+}
+
+.token.entity,
+.token.symbol {
+  color: #6897bb;
+}
+
+.token.number {
+  color: #ff628c;
+}
+
+.token.property,
+.token.constant,
+.token.variable {
+  color: #ff628c;
+}
+
+.token.string,
+.token.char {
+  color: #a5ff90;
+}
+
+.token.attr-value,
+.token.attr-value .punctuation {
+  color: #a5c261;
+}
+
+.token.attr-value .punctuation:first-child {
+  color: #a9b7c6;
+}
+
+.token.url {
+  color: #287bde;
+  text-decoration: underline;
+}
+
+.token.function {
+  color: rgb(250, 208, 0);
+}
+
+.token.regex {
+  background: #364135;
+}
+
+.token.bold {
+  font-weight: bold;
+}
+
+.token.italic {
+  font-style: italic;
+}
+
+.token.inserted {
+  background: #00ff00;
+}
+
+.token.deleted {
+  background: #ff000d;
+}
+.mdx-marker {
+  display: block;
+  margin-left: -5px;
+  margin-right: -5px;
+  padding-left: 5px;
+  padding-right: 5px;
+  background-color: gray;
+  box-shadow: inset 3px 0px 0 0px blue;
+  min-width: fit-content;
+}
+.remark-code-title {
+  background-color: rgb(192 132 252);
+  font-size: 1rem;
+  margin-top: 1.5rem;
+  padding: 2px 1em;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  font-weight: 300;
+  width: 100%;
+  text-align: right;
+  font-weight: 600;
+}
+
+
+
+table {
+  overflow-x: auto;
+  display: block;
+  font-size: 0.8rem;
+
+  table-layout: fixed;
+  overflow-wrap: break-word;
+}
+
+thead {
+  padding: 2px 4px;
+  background: rgb(214, 222, 235);
+  color: black;
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  font-weight: 600;
+  font-size: 16px;
+}
+
+th,
+td {
+  padding-left: 4px;
+  padding-right: 4px;
+  border: 1px solid gray;
+  color: white;
+}
+
+th {
+  color: black;
+}
+
+tbody {
+  background: #1e1e3f;
+  border: 1px solid black;
+}
+
+
+
+pre .language-jsx::before{
+  background: url(/assets/react.svg);
+  background-size: cover;
+  position: absolute;
+  content: '';
+  width: 32px;
+  height: 32px;
+  border-radius: 0;
+  top: -40px;
+  left: -10px;  
+}
