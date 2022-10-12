@@ -15,7 +15,7 @@ const BlogHeader: React.FC<BlogHeaderProps> = ({ title, publishedAt, tags, readi
     <div className=" border-b-2 pb-4 border-dashed border-gray-400">
       <div className="flex mt-2">
         {tags.map((tag, i) => {
-          return <LambdaTag key={i}>{tag}</LambdaTag>;
+          return <LambdaTag key={i} tag={tag}></LambdaTag>;
         })}
       </div>
       <h1 className=" text-4xl md:text-6xl font-bold mt-4 bg-clip-text text-transparent bg-gradient-to-tr from-blue-700 to-violet-400">
