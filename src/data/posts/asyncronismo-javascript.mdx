@@ -8,7 +8,7 @@ tags:
   - "💛 Javascript"
 references:
     link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
-status: "draft"
+status: "ready"
 ---
 
 Una de las preguntas clásicas en una entrevista de trabajo sobre frontend, sin importar que frameworks o librerías se usen, es la diferencia entre Callbacks, Promesas y Async/Await. ¿Cuál es mejor? ¿Porque usar una u otra? Es prácticamente una pregunta que la tienen preparada para el entrevistado.
@@ -100,7 +100,7 @@ function EatFruit(fruitName) {
 }
 ```
 
-Aquí vemos un ejemplo de una promesa. En este ejemplo tenemos una función que se llama eatFruit, que recibe un parámetro que es el nombre de la fruta. Esta función retorna una promesa, y esta promesa recibe dos parámetros, resolve y reject. Estos parámetros son funciones que podemos llamar para resolver o rechazar la promesa. En este ejemplo, si el nombre de la fruta es "mera mera no mi", resolvemos la promesa con el nombre de la fruta, y si no es "mera mera no mi", rechazamos la promesa con un mensaje de error.
+Aquí vemos un ejemplo de una promesa. En este ejemplo tenemos una función que se llama EatFruit, que recibe un parámetro que es el nombre de la fruta. Esta función retorna una promesa, y esta promesa recibe dos parámetros, resolve y reject. Estos parámetros son funciones que podemos llamar para resolver o rechazar la promesa. En este ejemplo, si el nombre de la fruta es "mera mera no mi", resolvemos la promesa con el nombre de la fruta, y si no es "mera mera no mi", rechazamos la promesa con un mensaje de error.
 
 > Las promesas nos permiten manejar el asincronismo de una forma más sencilla y legible. **Fueron introducidas en ES6, y son una mejora de los callbacks.**
 
@@ -123,7 +123,7 @@ function EatFruit(fruitName) {
 
 async function UseHability() {
   try {
-    const result = await eatFruit("mera mera no mi");
+    const result = await EatFruit("mera mera no mi");
     console.log(result);
   } catch (error) {
     console.log(error);
@@ -133,9 +133,9 @@ async function UseHability() {
 UseHability();
 ```
 
-En el ejemplo anterior hemos creado dos funciones. La primera función, eatFruit, retorna una promesa donde manejamos el asincronismo con los parámetros resolve y reject. La segunda función, useHability, es una función asincrónica, y dentro de esta función, utilizamos la palabra reservada await, para esperar a que la promesa se resuelva. Cuando la promesa se resuelve, la función useHability, imprime el resultado de la promesa. Si la promesa falla, la función useHability, imprime el error de la promesa.
+En el ejemplo anterior hemos creado dos funciones. La primera función, EatFruit, retorna una promesa donde manejamos el asincronismo con los parámetros resolve y reject. La segunda función, UseHability, es una función asincrónica, y dentro de esta función, utilizamos la palabra reservada await, para esperar a que la promesa se resuelva. Cuando la promesa se resuelve, la función UseHability, imprime el resultado de la promesa. Si la promesa falla, la función UseHability, imprime el error de la promesa.
 
-Cuando usábamos promesas, teníamos la posibilidad de manejar el error con el segundo parámetro de ```then()``` o el uso directo de ```catch()``` . Con async/await, podemos los errores dentro de un bloque try/catch.  
+Cuando usábamos promesas, teníamos la posibilidad de manejar el error con el segundo parámetro de ```then()``` o el uso directo de ```catch()```. Con async/await, podemos los errores dentro de un bloque try/catch.  
 
 
 > La llegada de Async y Await a JavaScript **fue una de las grandes novedades de ES2017**. Al igual que las promesas permite manejar el asincronismo de una forma más sencilla y legible.
