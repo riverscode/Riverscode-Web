@@ -10,14 +10,12 @@ type BlogProps = {
 
 const blog: React.FC<BlogProps> = ({ blogs }) => {
   return (
-    <>
-      <Layout>
-        <>
-          <SEO title="Blog - RiversCode" description="Los mejores articulos enfocados al desarrollo Web" image="sdfsdf"/>
-          <BlogList blogs={blogs} />
-        </>
-      </Layout>
-    </>
+    <Layout>
+      <>
+        <SEO title="Blog - RiversCode" description="Los mejores articulos enfocados al desarrollo Web" image="sdfsdf" />
+        <BlogList blogs={blogs} />
+      </>
+    </Layout>
   );
 };
 

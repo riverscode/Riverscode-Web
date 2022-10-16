@@ -11,7 +11,7 @@ const ProjectCard: React.FC<ProjectProps> = ({ project }) => {
       <div className={`absolute ${project.visibility == "public" ? "bg-orange-500" : "bg-gray-500"} top-4 -right-8 z-20 py-1 px-10 rotate-45`}>
         <p className={`text-white capitalize `}>{project.visibility}</p>
       </div>
-      <Image src={project.image} alt={project.name} height={220} width={320} layout="fixed" />
+      <Image className="object-fill" src={project.image} alt={project.name} height={220} width={420}  />
       <div className="p-4">
         <h3 className="text-xl md:text-2xl font-bold text-left">
           {project.name}

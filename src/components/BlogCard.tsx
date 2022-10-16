@@ -17,14 +17,13 @@ const BlogCard: React.FC<BlogType> = (blog) => {
     <Link href={`/blog/${slug}`}>
       <div className=" w-full border-2 border-primary/50 shadow-md shadow-primary/20 rounded-md  hover:-translate-y-1 transition ease-out  duration-300 hover:scale-103 cursor-pointer hover:bg-primary/30">
         <div className="flex">
-          <a className="flex items-center">
             <Image
+              className="object-cover "
               src={`/assets/${image}`}
               alt={title}
               width={140}
               height={160}
             />
-          </a>
           <div className="flex flex-col px-2 py-4">
             <div className="flex gap-x-2">
               {tags.map((tag, i) => {

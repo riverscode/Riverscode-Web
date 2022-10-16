@@ -1,0 +1,146 @@
+---
+title: "¿Que diablos respondo sobre el Asincronismo con JavaScript?"
+summary: "La clásica pregunta de diferencias entre Callbacks, Promesas y Async/Await"
+author: "Rivers Code"
+publishedAt: "2022-10-15"
+image: "javascript.png"
+tags:
+  - "💛 Javascript"
+references:
+    link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "draft"
+---
+
+Una de las preguntas clásicas en una entrevista de trabajo sobre frontend, sin importar que frameworks o librerías se usen, es la diferencia entre Callbacks, Promesas y Async/Await. ¿Cuál es mejor? ¿Porque usar una u otra? Es prácticamente una pregunta que la tienen preparada para el entrevistado.
+
+Este artículo trata de explicar de una manera sencilla y práctica, que es lo que hacen cada una de estas formas de manejar el asincronismo en JavaScript. Haremos ejemplos para poder entender al fin que es lo que hacen y como se usan.
+
+## Asincronismo
+
+Antes de iniciar con el camino de los callbacks, promesas y Async/Await es necesario entender el concepto de asincronismo. Iniciemos primero con entender que es el sincronismo en los lenguajes de programación. 
+
+> **El sincronismo** es cuando un programa se ejecuta línea por línea, es decir, que cada línea de código se ejecuta una después de la otra. 
+
+El asincronismo es una característica de JavaScript que nos permite ejecutar código de manera no secuencial, es decir, que podemos ejecutar código que no depende de que el código anterior se haya ejecutado. Esto nos permite hacer cosas como hacer peticiones a un servidor, esperar a que el usuario haga click en un botón, o esperar a que el usuario escriba algo en un input.
+
+Entonces podemos decir que JavaScript es un lenguaje de programación asincrono, ya que nos permite ejecutar código de manera no secuencial. La respuesta es no, ya que la definición correcta de javascript es que es un lenguaje de programación sincrono por defecto y no bloqueante utilizando un único subproceso, con un bucle de eventos **(Concurrencia)**.
+
+La palabra clave en el anterior es **no es bloqueante**. Esto quiere decir que cuando ejecutamos código que puede tardar un tiempo, no bloqueamos el hilo principal de ejecución, es decir, que podemos seguir ejecutando código mientras esperamos a que el código que se esta ejecutando termine.
+
+Otro concepto que vamos encontrar es que JavaScript tiene un único hilo principal de ejecución **(Single Thread)**. Esto quiere decir que JavaScript no puede ejecutar dos cosas a la vez, es decir, que no podemos ejecutar dos funciones a la vez.
+
+## Concurrencia en JavaScript
+
+La concurrencia es la capacidad de ejecutar multiples tareas al mismo tiempo. JavaScript es un lenguaje de programación que es concurrencia, ya que podemos ejecutar multiples tareas al mismo tiempo. Esto quiere decir que podemos ejecutar multiples funciones al mismo tiempo, pero no podemos ejecutar dos funciones al mismo tiempo, en caso una tarea demore más de lo debido haremos la siguiente esperando que la otra se maneje.
+
+JavaScript maneja la concurrencia mediante un bucle de eventos. Este bucle de eventos (event loop) es un bucle que se ejecuta constantemente, y que se encarga de ejecutar las funciones que se encuentran en la cola de tareas. Este bucle de eventos se ejecuta constantemente, y se encarga de ejecutar las funciones que se encuentran en la cola de tareas. Este bucle de eventos se ejecuta constantemente, y se encarga de ejecutar las funciones que se encuentran en la cola de tareas.
+
+![EventLoop](https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665886661/blog-Riverscode/EventLoop_vlabdp.png)
+
+## Callbacks
+
+Una función de callback es una función que se pasa a otra función como un argumento, que luego se invoca dentro de la función externa para completar algún tipo de rutina o acción (mdn web docs) 
+
+```js:callbacks.js
+function UseHability(fruitName) {
+  console.log(`Ahora puedo usar el poder de la fruta  ${fruitName}`);
+}
+
+function EatFruit(fruitName, callback) {
+  console.log(`He comido la fruta ${fruitName}`);
+  callback();
+}
+
+EatFruit("mera mera no mi", UseHability);
+```
+
+Lo que podemos ver es que podemos manejar el asincronismo en JavaScript mediante funciones de callback. En este ejemplo tenemos una función que se llama EatFruit, que recibe dos parámetros, el nombre de la fruta y una función de callback. Dentro de la función EatFruit, ejecutamos la función que recibimos como parámetro, y le pasamos el nombre de la fruta como parámetro.
+
+
+```js:callbacks.js
+function UseHability(fruitName) {
+  console.log(`Ahora puedo usar el poder de la fruta  ${fruitName}`);
+}
+
+function EatFruit(fruitName, callback) {
+  console.log(`He comido la fruta ${fruitName}`);
+  setTimeout(callback, 2000);
+}
+```
+
+En este ejemplo podemos ver que la función de callback se ejecuta después de 2 segundos. Esto es debido a que la función setTimeout, nos permite ejecutar una función después de un tiempo determinado. En este caso, la función setTimeout, nos permite ejecutar la función de callback después de 2 segundos.
+
+> No es recomendable usar funciones de callback para manejar el asincronismo en JavaScript, ya que puede llegar a ser muy complicado de entender y mantener. Puede generar el famoso **callback hell que es un problema que se presenta cuando tenemos multiples funciones de callback anidadas**.
+
+## Promesas 
+
+Las promesas son un objeto que representa la terminación o el fracaso eventual de una operación asíncrona. Una promesa puede estar en uno de tres estados: pendiente, cumplida o rechazada. 
+
+- **Pending:** Estado inicial, ni cumplido ni rechazado.
+- **Fulfilled:** Lo que significa que la operación se completó con éxito.
+- **Rejected:** Lo que significa que la operación falló.
+
+Cuando tenemos una promesa, tenemos dos opciones de resultados. Puede retornar un valor en caso la promesa se resuelva con éxito o nos puede retorna un error en caso la promesa falle. Para manejar estos resultados lo podemos hacer mediante los controladores then y catch.
+
+Utilizamos then cuando queremos manejar el resultado de una promesa que se resolvió con éxito. Utilizamos catch cuando queremos manejar el resultado de una promesa que fallo.
+
+El método ```.then()```  toma hasta dos argumentos; el primer argumento es una función de devolución de llamada **(callback)** para el caso resuelto de la promesa, y el segundo argumento es una función de devolución de llamada para el caso rechazado.
+
+```js:promises.js
+function EatFruit(fruitName) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (fruitName === "mera mera no mi") {
+        resolve(`Ahora puedo usar el poder de la fruta  ${fruitName}`);
+      } else {
+        reject("Usted no es un pirata");
+      }
+    }, 2000);
+  });
+}
+```
+
+Aquí vemos un ejemplo de una promesa. En este ejemplo tenemos una función que se llama eatFruit, que recibe un parámetro que es el nombre de la fruta. Esta función retorna una promesa, y esta promesa recibe dos parámetros, resolve y reject. Estos parámetros son funciones que podemos llamar para resolver o rechazar la promesa. En este ejemplo, si el nombre de la fruta es "mera mera no mi", resolvemos la promesa con el nombre de la fruta, y si no es "mera mera no mi", rechazamos la promesa con un mensaje de error.
+
+> Las promesas nos permiten manejar el asincronismo de una forma más sencilla y legible. **Fueron introducidas en ES6, y son una mejora de los callbacks.**
+
+## Async/Await 
+
+Iniciemos diciendo que **Async/Await** es considerado un azúcar sintáctico de las promesas. Esto quiere decir que cuando usamos async/await, estamos usando promesas solo que de una manera mas "Sencilla" con el objetivo de evitarnos usar ```then()``` y ```catch()```. 
+
+```js:async-await.js
+function EatFruit(fruitName) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (fruitName === "mera mera no mi") {
+        resolve(`Ahora puedo usar el poder de la fruta  ${fruitName}`);
+      } else {
+        reject("Usted no es un pirata");
+      }
+    }, 2000);
+  });
+}
+
+async function UseHability() {
+  try {
+    const result = await eatFruit("mera mera no mi");
+    console.log(result);
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+UseHability();
+```
+
+En el ejemplo anterior hemos creado dos funciones. La primera función, eatFruit, retorna una promesa donde manejamos el asincronismo con los parámetros resolve y reject. La segunda función, useHability, es una función asincrónica, y dentro de esta función, utilizamos la palabra reservada await, para esperar a que la promesa se resuelva. Cuando la promesa se resuelve, la función useHability, imprime el resultado de la promesa. Si la promesa falla, la función useHability, imprime el error de la promesa.
+
+Cuando usábamos promesas, teníamos la posibilidad de manejar el error con el segundo parámetro de ```then()``` o el uso directo de ```catch()``` . Con async/await, podemos los errores dentro de un bloque try/catch.  
+
+
+> La llegada de Async y Await a JavaScript **fue una de las grandes novedades de ES2017**. Al igual que las promesas permite manejar el asincronismo de una forma más sencilla y legible.
+
+
+
+
+

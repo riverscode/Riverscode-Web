@@ -1,4 +1,4 @@
-import Footer from "./Footer";
+import Footer from "./Sections/Footer";
 import Navbar from "./Navbar";
 
 type LayoutProps = {
@@ -7,9 +7,11 @@ type LayoutProps = {
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
-    <div className="antialiased">
+    <div className="flex flex-col antialiased min-h-screen ">
       <Navbar />
-      {children}
+      <main className="flex-1">
+        {children}
+      </main>
       <Footer />
     </div>
   );

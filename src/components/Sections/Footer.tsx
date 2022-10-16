@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { redesSociales } from '../constants'
+import { redesSociales } from '../../constants'
 
 
 const Footer: React.FC = () => {
   return (
-    <footer className=" left-0 right-0 bottom-0 py-8  bg-gradient-to-b">
+    <footer className="py-8 mt-12">
       <div className=" border-b border-gray-300 pb-4">
         <div className="flex justify-center items-center max-w-7xl m-auto">
           <Image

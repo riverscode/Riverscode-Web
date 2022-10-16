@@ -1,11 +1,9 @@
 import Image, { ImageProps } from "next/image";
 
 
-const CustomImage = (props: ImageProps) => {
+const CustomImage = ({src}: {src:string}) => {
   return (
-    <div className=" flex justify-center p-8 custom-box-shadow bg-black mb-6">
-      <Image width={20} height={20} {...props} className="rounded-lg" alt="Resaltado" />
-    </div>
+      <img width={720} height={220}  src={src}  alt="Resaltado" />
   );
 };
 

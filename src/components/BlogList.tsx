@@ -19,7 +19,7 @@ const BlogList: React.FC<BlogListProps> = ({ blogs }) => {
       frontMatter.title?.toLowerCase().includes(searchValue.toLowerCase())
     );
   return (
-    <div className={`${style.section} mt-32 mt md:mt-44`}>
+    <div className={`${style.section} mt-32 md:mt-44`}>
       <div className="flex items-center">
         <h2 className="text-xl md:text-3xl font-extrabold text-purple-500">
           Nuestros artículos{" "}

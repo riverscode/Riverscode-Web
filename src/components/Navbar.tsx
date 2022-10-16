@@ -3,6 +3,21 @@ import Image from "next/image";
 import Link from "next/link";
 import style from '../styles/style';
 
+type NavLinkItemProps = {
+  text: string;
+  href: string
+}
+
+const NavLinkItem = ({text, href}:NavLinkItemProps) => {
+  return (
+    <li className="relative group ">
+      <Link href={href} >
+        <a className= "hover:text-primary" >{text}</a></Link>
+      <span className="w-0 absolute -bottom-2 left-0 block h-1 group-hover:bg-primary group-hover:w-full transition-all duration-500"></span>
+    </li>
+  )
+}
+
 const Navbar = () => {
   const [isHidden, setIsHidden] = useState<boolean>(true);
 
@@ -28,30 +43,8 @@ const Navbar = () => {
           </Link>
           <nav className="hidden md:flex items-center justify-between">
             <ul className="flex space-x-4  font-semibold ">
-              <li>
-                <Link href="#about">
-                  <a className="px-4 py-2 rounded">Sobre Mi</a>
-                </Link>
-              </li>
-
-              <li>
-                <Link href="/blog">
-                  <a className="px-4 py-2 rounded">Blog</a>
-                </Link>
-              </li>
-
-              <li>
-                <Link href="#work">
-                  <a className="px-4 py-2 rounded">Trabajos</a>
-                </Link>
-              </li>
-            
-
-              <li>
-              <Link href="#experiencia">
-                <a className="px-4 py-2 rounded">Experiencia</a>
-              </Link>
-              </li>
+              <NavLinkItem text="Blog" href="/blog" />
+              <NavLinkItem text="Proyectos" href="/projects" />
 
             </ul>
           </nav>
