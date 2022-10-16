@@ -158,8 +158,6 @@ pre[class*="language-"] {
   font-weight: 600;
 }
 
-
-
 table {
   overflow-x: auto;
   display: block;
@@ -194,28 +192,4 @@ th {
 tbody {
   background: #1e1e3f;
   border: 1px solid black;
-}
-
-pre .language-js::before{
-  background: url(/assets/javascript.png);
-  background-size: cover;
-  position: absolute;
-  content: '';
-  width: 32px;
-  height: 32px;
-  border-radius: 0;
-  top: -40px;
-  left: -10px;  
-}
-
-pre .language-jsx::before{
-  background: url(/assets/react.png);
-  background-size: cover;
-  position: absolute;
-  content: '';
-  width: 32px;
-  height: 32px;
-  border-radius: 0;
-  top: -40px;
-  left: -10px;  
 }

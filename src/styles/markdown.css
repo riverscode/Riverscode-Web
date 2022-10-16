@@ -844,7 +844,6 @@
 .markdown-body .highlight pre,
 .markdown-body pre {
   padding: 16px;
-  overflow-x: scroll;
   word-break: break-all;
   font-size: 85%;
   line-height: 1.45;
@@ -964,4 +963,23 @@
   margin: 0 auto;
   border-radius: 5px;
   border: #a35cff 8px solid;
+}
+
+pre[class*="language-js"] {
+  position: relative;
+  overflow-x: auto;
+  /* overflow-y: ; */
+}
+pre[class*="language-js"]::before {
+  background: url(/assets/javascript.png);
+  background-size: cover;
+  position: absolute;
+  content: "";
+  width: 90px;
+  height: 90px;
+  object-fit: fit;
+  border-radius: 0;
+  /* top: -20px; */
+  left: 10px;
+  opacity: 0.07;
 }
