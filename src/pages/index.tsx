@@ -15,7 +15,7 @@ export default function Home({blogs}: {blogs: BlogType[]}) {
           <Banner />
           <Tecnologies />
           <Blogs blogs={blogs} />
-          <Projects />
+          {/* <Projects /> */}
         </main>
       </>
     </Layout>

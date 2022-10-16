@@ -43,7 +43,7 @@ Una función de callback es una función que se pasa a otra función como un arg
 
 ```js:callbacks.js
 function UseHability(fruitName) {
-  console.log(`Ahora puedo usar el poder de la fruta  ${fruitName}`);
+  console.log(`Puedes usar el poder de ${fruitName}`);
 }
 
 function EatFruit(fruitName, callback) {
@@ -59,7 +59,7 @@ Lo que podemos ver es que podemos manejar el asincronismo en JavaScript mediante
 
 ```js:callbacks.js
 function UseHability(fruitName) {
-  console.log(`Ahora puedo usar el poder de la fruta  ${fruitName}`);
+  console.log(`Puedes usar el poder de ${fruitName}`);
 }
 
 function EatFruit(fruitName, callback) {
@@ -91,7 +91,7 @@ function EatFruit(fruitName) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fruitName === "mera mera no mi") {
-        resolve(`Ahora puedo usar el poder de la fruta  ${fruitName}`);
+        resolve(`Puedes usar el poder de ${fruitName}`);
       } else {
         reject("Usted no es un pirata");
       }
@@ -113,7 +113,7 @@ function EatFruit(fruitName) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
       if (fruitName === "mera mera no mi") {
-        resolve(`Ahora puedo usar el poder de la fruta  ${fruitName}`);
+        resolve(`Puedes usar el poder de ${fruitName}`);
       } else {
         reject("Usted no es un pirata");
       }

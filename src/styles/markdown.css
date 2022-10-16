@@ -844,7 +844,8 @@
 .markdown-body .highlight pre,
 .markdown-body pre {
   padding: 16px;
-  /* overflow: auto; */
+  overflow-x: scroll;
+  word-break: break-all;
   font-size: 85%;
   line-height: 1.45;
   background-color: #161b22;
@@ -958,7 +959,7 @@
 }
 
 .markdown-body p > img {
-  max-width: 100%;
+  max-width: 90%;
   text-align: center;
   margin: 0 auto;
   border-radius: 5px;

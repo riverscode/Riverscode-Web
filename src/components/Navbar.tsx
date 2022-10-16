@@ -44,7 +44,7 @@ const Navbar = () => {
           <nav className="hidden md:flex items-center justify-between">
             <ul className="flex space-x-4  font-semibold ">
               <NavLinkItem text="Blog" href="/blog" />
-              <NavLinkItem text="Proyectos" href="/projects" />
+              {/* <NavLinkItem text="Proyectos" href="/projects" /> */}
 
             </ul>
           </nav>
@@ -110,11 +110,11 @@ const Navbar = () => {
               Blog
             </a>
           </Link>
-          <Link href="/cursos">
+          {/* <Link href="/cursos">
             <a className=" hover:text-purple-400  transition-all duration-300">
               Cursos
             </a>
-          </Link>
+          </Link> */}
 
         </div>
       </div>
