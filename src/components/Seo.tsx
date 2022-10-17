@@ -6,12 +6,12 @@ type SeoProps = {
   description: string;
   keywords?: string;
   canonical?: string;
-  image: string;
+  image?: string;
   extraMeta?: [{ name: string; content: string }];
 
 }
 
-const Seo: React.FC<SeoProps> = ({title = "RiversCode", description, keywords="Desarrollo Web, React, Javascript", canonical = "https://riverscode.me", image, extraMeta}) => {
+const Seo: React.FC<SeoProps> = ({title = "RiversCode", description, keywords="Desarrollo Web, React, Javascript", canonical = "https://riverscode.me", image="https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1641850100/lambda-ogimage_mbrwai.webp", extraMeta}) => {
 
   const metaData = [
     {

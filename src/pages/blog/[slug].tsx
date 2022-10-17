@@ -18,10 +18,11 @@ interface BlogProps {
     publishedAt: string;
     tags: []; 
     readingTime: { text: string}; 
+    cover: string
   };
 }
 const BlogItem: React.FC<BlogProps> = ({ source, frontMatter }) => {
-  const { slug, title, summary, publishedAt, tags, readingTime  } = frontMatter;
+  const { slug, title, summary, publishedAt, tags, readingTime, cover  } = frontMatter;
 
   return (
     <>
@@ -29,7 +30,7 @@ const BlogItem: React.FC<BlogProps> = ({ source, frontMatter }) => {
         <>
         <SEO
           title={`Blog RiversCode | ${title}`}
-          image={`https://lambda.com.pe/images/posts/${slug}/cover.png`}
+          image={cover}
           description={summary}
         />
         <div className="flex flex-col max-w-7xl mx-auto mt-12 md:mt-16">
