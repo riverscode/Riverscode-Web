@@ -1,0 +1,80 @@
+---
+title: "Paso necesarios para trabajar con git"	
+summary: "Que pasos necesito saber para trabajar con git y github"
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2022-10-17"
+image: "github.webp"
+tags:
+  - "😸 Github"
+references:
+    link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "draft"
+---
+## Trabajar con ramas
+
+### Crear una rama
+
+```bash:terminal
+git checkout -b nombre-rama
+```
+
+### Cambiar de rama
+
+```bash:terminal
+git checkout nombre-rama
+```
+
+### Eliminar una rama
+
+```bash:terminal
+git branch -d nombre-rama
+```
+
+### Eliminar una rama forzada
+
+
+```bash:terminal
+git branch -D nombre-rama
+```
+
+### Ver las ramas
+
+```bash:terminal
+git branch
+```
+
+### Ver las ramas y sus commits
+
+```bash:terminal
+git branch -v
+```
+
+## Stash
+
+El comando git stash almacena temporalmente (o guarda en un stash) los cambios que hayas efectuado en el código en el que estás trabajando para que puedas trabajar en otra cosa y, más tarde, regresar y volver a aplicar los cambios más tarde. Guardar los cambios en stashes resulta práctico si tienes que cambiar rápidamente de contexto y ponerte con otra cosa, pero estás en medio de un cambio en el código y no lo tienes todo listo para confirmar los cambios.
+
+### Cómo guardar el trabajo en un stash
+
+```bash:terminal
+git stash
+```
+
+### Cómo ver los stashes
+
+```bash:terminal
+git stash list
+```
+
+### Cómo recuperar los cambios de un stash
+
+```bash:terminal
+git stash apply
+```
+
+### Cómo recuperar los cambios de un stash y eliminarlo
+
+```bash:terminal
+git stash pop
+```
+

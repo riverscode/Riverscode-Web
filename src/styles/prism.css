@@ -8,7 +8,7 @@ pre[class*="language-"] {
   text-shadow: 0 0 2px #100c0f, 0 0 5px #dc078e33, 0 0 10px #fff3;
   background: none;
   font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
-  font-size: 1em;
+  font-size: 2em;
   text-align: left;
   white-space: pre;
   word-spacing: normal;
@@ -192,4 +192,8 @@ th {
 tbody {
   background: #1e1e3f;
   border: 1px solid black;
+}
+
+pre > code {
+  color: whitesmoke;
 }

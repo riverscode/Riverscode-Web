@@ -15,16 +15,16 @@ const BlogCard: React.FC<BlogType> = (blog) => {
   } = blog
   return (
     <Link href={`/blog/${slug}`}>
-      <div className=" w-full border-2 border-primary/50 shadow-md shadow-primary/20 rounded-md  hover:-translate-y-1 transition ease-out  duration-300 hover:scale-103 cursor-pointer hover:bg-primary/30">
-        <div className="flex">
-            <Image
-              className="object-cover "
+      <div className=" overflow-hidden  w-full border-4 border-primary/50 shadow-md shadow-primary/20 rounded-md  hover:-translate-y-1 transition ease-out  duration-300 hover:scale-103 cursor-pointer hover:bg-primary/30 h-40">
+        <div className="flex h-full">
+          <div className="">
+            <img
+              className="w-12 object-fit sm:w-40 sm:object-cover h-full" 
               src={`/assets/${image}`}
               alt={title}
-              width={140}
-              height={160}
-            />
-          <div className="flex flex-col px-2 py-4">
+              />
+          </div>
+          <div className="flex flex-1 flex-col px-2 py-4">
             <div className="flex gap-x-2">
               {tags.map((tag, i) => {
                 return <LambdaTag key={i} tag={tag}></LambdaTag>;

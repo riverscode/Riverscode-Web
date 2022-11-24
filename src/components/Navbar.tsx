@@ -26,10 +26,10 @@ const Navbar = () => {
   };
   
   return (
-    <header className="fixed top-0 right-0 w-full bg-white z-50">
+    <header className="fixed top-0 right-0 w-full bg-white z-50 ">
       <div>
       <div className="relative border-b border-gray-300 ">
-        <div className={`${style.boxWidth} mx-auto px-4 py-4 flex items-center justify-between`}>
+        <div className={`lg:max-w-[1280px] w-full mx-auto px-4 lg:px-0 py-4 flex items-center justify-between `}>
           <Link href="/">
             <a className="flex items-center">
                 <Image

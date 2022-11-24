@@ -1,0 +1,206 @@
+---
+title: "Mi primera aplicación con Three.js y React"	
+summary: "Tutorial básico de Three.js dentro del entorno de React.js"
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2022-11-21"
+image: "threejs.webp"
+tags:
+  - "💻 Three.js "
+  - "⚛ React.js"
+references:
+    link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "draft"
+---
+
+## Introducción
+
+En este tutorial vamos a aprender los fundamentos de Three.js, una librería de JavaScript que nos permite crear gráficos 3D en la web. Para ello vamos a utilizar React.js como entorno de desarrollo.
+
+## Agenda
+
+- 💻 Agregar Three.js a nuestro proyecto
+- ✨ useRef para referenciar nuestro renderizado
+- 🔮 Crear una escena
+- 📸 Crear una cámara
+- 🎨 Crear un renderizador
+- 🎲 Crear un mesh
+- 🚫 Solucionar problemas comunes
+
+## Tutorial
+
+### 💻 Agregar Three.js a nuestro proyecto
+
+Lo primero que haremos es instalar three.js dentro de nuestro proyecto y esto lo podemos hacer usando npm.
+
+```bash
+npm install three 
+```
+
+Crearemos un archivo Sceme.js dentro de la carpeta 📁components que será el encargado de manejar todo lo relacionado con Three.js.
+
+```jsx:Sceme.jsx
+const Scene = () => {
+  return <div className=" w-full h-screen">
+    <h1>Aquí Montaremos nuestro contenido 3D</h1>
+  </div>;
+};
+export default Scene;
+
+```
+
+> En este caso estamos manejando Tailwindcss para los estilos. Podemos revisar la pagina oficial de Tailwindcss y en parte de integración seguir los pasos de [integración con Vite](https://tailwindcss.com/docs/guides/vite)
+
+Ahora importemos este componente en App.js
+
+```jsx:App.js
+import Scene from "./components/Scene";
+function App() {
+  return (
+    <div className="App">
+      <Scene />
+    </div>
+  );
+}
+export default App;
+```
+
+### ✨ useRef para referenciar nuestro renderizado
+
+Ya que hemos importado nuestro componente Scene, ahora vamos a usar el hook **useRef** que nos permita manejar el canvas de Three.js. Además, vamos a usar el hook **useEffect** para que se ejecute una sola vez y no se vuelva a ejecutar.
+
+
+```jsx:Sceme.jsx
+import { useEffect, useRef } from "react";
+import * as THREE from "three";
+
+const Scene = () => {
+  const canvasRef = useRef();
+  useEffect(() => {
+    const currentCanvas = canvasRef.current;
+
+    // #### Código de Three.js ####
+
+  }, []);
+
+  return (
+    <div className=" w-full h-screen" ref={canvasRef}>
+    </div>
+  );
+};
+export default Scene;
+```
+
+### 🔮 Crear nuestra escena
+
+Ahora vamos a crear nuestra escena, para ello vamos a crear una constante llamada **[scene](https://threejs.org/docs/#api/en/scenes/Scene)** y le asignaremos una nueva instancia de **THREE.Scene()**.
+
+```jsx:Sceme.jsx
+// Las escenas le permiten configurar qué y dónde se renderizará con three.js. 
+// Aquí es donde colocas objetos, luces y cámaras.
+const scene = new THREE.Scene();
+
+```
+
+### 📸 Crear nuestra cámara
+
+Ahora vamos a crear nuestra cámara, para ello vamos a crear una constante llamada **camera** y le asignaremos una nueva instancia de **[THREE.PerspectiveCamera()](https://threejs.org/docs/#api/en/cameras/PerspectiveCamera)**.
+
+```jsx:Sceme.jsx
+const camera = new THREE.PerspectiveCamera(
+  75, // Campo de visión
+  window.innerWidth / window.innerHeight, // Relación de aspecto
+  0.1, // Plano cercano
+  1000 // Plano lejano
+);
+
+```
+
+También tenemos la opción de crear una cámara ortográfica con **[THREE.OrthographicCamera()](https://threejs.org/docs/?q=camera#api/en/cameras/OrthographicCamera)**.
+
+```jsx:Sceme.jsx
+const camera = new THREE.OrthographicCamera(
+  window.innerWidth / -2, // Izquierda
+  window.innerWidth / 2, // Derecha
+  window.innerHeight / 2, // Arriba
+  window.innerHeight / -2, // Abajo
+  0.1, // Plano cercano
+  1000 // Plano lejano
+);
+```
+
+
+Para seguir con nuestro ejemplo en el cual hacemos referencia a un div mediante el **useRef** vamos a definir el window.innerWidth igual a **currentCanvas.clientWidth** y el window.innerHeight igual a **currentCanvas.clientHeight**.
+
+> La **PerspectiveCamera** es la más común. Simula la visión humana. La **OrthographicCamera** es una cámara ortográfica. No simula la visión humana, pero es útil para renderizar objetos 2D.
+
+![Three.js - PerspectiveCamera vs OrthographicCamera](https://i.stack.imgur.com/6ZfBu.png)
+
+### 🎨 Crear nuestro renderizador
+
+Ahora vamos a crear nuestro renderizador, para ello vamos a crear una constante llamada **renderer** y le asignaremos una nueva instancia de **[THREE.WebGLRenderer()](https://threejs.org/docs/#api/en/renderers/WebGLRenderer)**.
+
+```jsx:Sceme.jsx
+const renderer = new THREE.WebGLRenderer({
+  antialias: true, // Suavizado
+});
+renderer.setSize(currentCanvas.clientWidth, currentCanvas.clientHeight);
+```
+
+### Armar todo nuestro renderizador
+
+Ahora vamos a agregar nuestro renderizador al DOM, para ello vamos a crear una constante llamada **currentCanvas** y le asignaremos el valor de **canvasRef.current**.
+
+Posteriormente realizaremos el render de la scenea y la camara.
+
+```jsx:Sceme.jsx
+// Agregamos el renderizador al DOM
+currentCanvas.appendChild(renderer.domElement);
+
+// Renderizar la escena y la cámara
+renderer.render(scene, camera);
+```
+
+### 🎲 Agregaremos un Mesh
+
+Ahora vamos a agregar un Mesh, para formar un Mesh es necesario formarlo a partir de dos elementos principales. El primero es un **[Geometry](https://threejs.org/docs/#api/en/core/Geometry)** y el segundo es un **[Material](https://threejs.org/docs/#api/en/materials/Material)**.
+
+```jsx:Sceme.jsx
+const cube = new THREE.BoxGeometry(1, 1, 1); // Geometría del cubo (ancho, alto, profundidad)
+const material = new THREE.MeshBasicMaterial({ color: 0x00ff00 }); // Material del cubo (color)
+const mesh = new THREE.Mesh(cube, material); // Mesh (geometría, material)
+scene.add(mesh); // Agregamos el mesh a la escena
+```
+
+>Podríamos hacer una analogía diciendo que la geometría es el esqueleto y el material es la piel. En este caso estamos usando un [MeshBasicMaterial](https://threejs.org/docs/?q=MeshBasicMaterial#api/en/materials/MeshBasicMaterial) que es un material básico que no se ve afectado por la luz. 
+
+### 🚫 Solucionar problemas de la cámara.
+
+Si nosotros verificamos actualmente el renderizado en nuestro navegador nos daremos con la sorpresa que nuestro cubo no se ve. Esto se debe a que la cámara se encuentra en el mismo lugar que el cubo. Para solucionar esto vamos a mover la cámara 5 unidades en el eje Z.
+
+```jsx:Sceme.jsx
+// Cambiar posición unicamente en z
+camera.position.z = 5;
+
+// Cambiar posición en x y z
+camera.position.set(0,0,5);
+```
+
+### 🚫 Solucionando problemas de useEffect
+
+Si verificamos el DOM de nuestro navegador nos daremos con la sorpresa que existen más de un canvas. Esto se debe al funcionamiento del **useEffect** que se ejecuta cada vez que se renderiza el componente. Para solucionar esto vamos a agregar un **return** en nuestro **useEffect**.
+
+```jsx:Sceme.jsx
+useEffect(() => {
+  // #### Código Three.js ####
+
+  return () => {
+    currentCanvas.removeChild(renderer.domElement);
+  }
+}, []);
+```
+
+Finalmente hemos creado nuestro primer proyecto en React.js usando la librería Three.js. Te invito a que continues con los siguientes tutoriales dado que veremos temas relacionados con las colores, luces, texturas, animaciones, etc.
+
+
+Espero que les sirva el pequeño tutorial sobre como crear. ¿Cómo apoyarme a seguir creando contenido? simplemente compartan el artículo, síganme en [YouTube](https://www.youtube.com/c/RiversCode), [Instagram](https://www.instagram.com/rivers_code/) y [Facebook](https://www.facebook.com/LambdaInnovacion/).

@@ -260,11 +260,12 @@
   font-weight: 700;
   padding-bottom: 0.3em;
   font-size: 1.5em;
+  
 }
 
 .markdown-body h3 {
   font-weight: 600;
-  font-size: 0.95em;
+  font-size: 1.2em;
 }
 
 .markdown-body h4 {
@@ -968,6 +969,8 @@
 pre[class*="language-js"] {
   position: relative;
   overflow-x: auto;
+  font-size: 16px;
+  font-weight: bold;
   /* overflow-y: ; */
 }
 pre[class*="language-js"]::before {

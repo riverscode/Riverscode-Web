@@ -17,7 +17,8 @@ const Blogs: React.FC<BlogsProps> = ({blogs}) => {
       Últimos artículos
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
-        {blogs.slice(0,3).map((blog, index) => {
+        {/* {blogs.slice(0,3).map((blog, index) => { */}
+        {blogs.map((blog, index) => {
           return (<BlogCard key={index} {...blog} />)
         }
         )}

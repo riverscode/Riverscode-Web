@@ -33,7 +33,7 @@ const BlogItem: React.FC<BlogProps> = ({ source, frontMatter }) => {
           image={cover}
           description={summary}
         />
-        <div className="flex flex-col max-w-7xl mx-auto mt-12 md:mt-16">
+        <div className="flex flex-col max-w-7xl mx-auto mt-12 md:mt-16 px-6 mx:px-0">
           <div className="flex flex-col md:grid md:grid-cols-12 md:gap-12 mt-16">
             <div className="md:col-span-12 px-4 md:px-0">
               <BlogHeader
