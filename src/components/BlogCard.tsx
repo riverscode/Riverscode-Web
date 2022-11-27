@@ -19,7 +19,7 @@ const BlogCard: React.FC<BlogType> = (blog) => {
         <div className="flex h-full">
           <div className="">
             <img
-              className="w-32 object-fit sm:w-40 sm:object-cover h-full"
+              className="w-24 object-fit sm:w-40 sm:object-cover h-full"
               src={`/assets/${image}`}
               alt={title}
               />
@@ -33,7 +33,7 @@ const BlogCard: React.FC<BlogType> = (blog) => {
             <h2 className="flex-1 text-lg md:text-2xl font-bold text-left mt-2">
               {title}
             </h2>
-            <div className=" flex justify-between  items-start">
+            <div className=" flex flex-col sm:flex-row sm:justify-between items-start">
               <div className="flex justify-center items-center">
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
