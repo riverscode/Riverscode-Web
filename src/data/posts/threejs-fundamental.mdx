@@ -1,5 +1,5 @@
 ---
-title: "Mi primera aplicación con Three.js y React"	
+title: "Mi primera aplicación con Three.js y React"
 summary: "Tutorial básico de Three.js dentro del entorno de React.js"
 cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
 author: "Rivers Code"
@@ -10,7 +10,7 @@ tags:
   - "⚛ React.js"
 references:
     link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
-status: "draft"
+status: "ready"
 ---
 
 ## Introducción
@@ -34,7 +34,7 @@ En este tutorial vamos a aprender los fundamentos de Three.js, una librería de 
 Lo primero que haremos es instalar three.js dentro de nuestro proyecto y esto lo podemos hacer usando npm.
 
 ```bash
-npm install three 
+npm install three
 ```
 
 Crearemos un archivo Sceme.js dentro de la carpeta 📁components que será el encargado de manejar todo lo relacionado con Three.js.
@@ -96,7 +96,7 @@ export default Scene;
 Ahora vamos a crear nuestra escena, para ello vamos a crear una constante llamada **[scene](https://threejs.org/docs/#api/en/scenes/Scene)** y le asignaremos una nueva instancia de **THREE.Scene()**.
 
 ```jsx:Sceme.jsx
-// Las escenas le permiten configurar qué y dónde se renderizará con three.js. 
+// Las escenas le permiten configurar qué y dónde se renderizará con three.js.
 // Aquí es donde colocas objetos, luces y cámaras.
 const scene = new THREE.Scene();
 
@@ -172,7 +172,7 @@ const mesh = new THREE.Mesh(cube, material); // Mesh (geometría, material)
 scene.add(mesh); // Agregamos el mesh a la escena
 ```
 
->Podríamos hacer una analogía diciendo que la geometría es el esqueleto y el material es la piel. En este caso estamos usando un [MeshBasicMaterial](https://threejs.org/docs/?q=MeshBasicMaterial#api/en/materials/MeshBasicMaterial) que es un material básico que no se ve afectado por la luz. 
+>Podríamos hacer una analogía diciendo que la geometría es el esqueleto y el material es la piel. En este caso estamos usando un [MeshBasicMaterial](https://threejs.org/docs/?q=MeshBasicMaterial#api/en/materials/MeshBasicMaterial) que es un material básico que no se ve afectado por la luz.
 
 ### 🚫 Solucionar problemas de la cámara.
 

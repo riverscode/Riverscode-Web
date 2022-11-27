@@ -17,12 +17,19 @@ const Blogs: React.FC<BlogsProps> = ({blogs}) => {
       Últimos artículos
       </h2>
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-2 gap-6 mt-6">
-        {/* {blogs.slice(0,3).map((blog, index) => { */}
-        {blogs.map((blog, index) => {
+        {blogs.slice(0,4).map((blog, index) => {
           return (<BlogCard key={index} {...blog} />)
         }
         )}
       </div>
+      <div className="flex justify-center mt-6">
+        <Link href="/blog">
+          <a className="bg-purple-500 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded">
+            Ver más
+          </a>
+        </Link>
+      </div>
+
     </section>
   )
 }

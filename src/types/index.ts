@@ -6,6 +6,7 @@ export type BlogType = {
   slug: string;
   readingTime: { text: string, minutes: number };
   image: string;
+  status: string;
 }
 
 export type ProjectType = {
