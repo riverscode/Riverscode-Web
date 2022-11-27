@@ -5,7 +5,7 @@ type BlogHeaderProps = {
   title: string;
   publishedAt: string;
   tags: [];
-  readingTime: { 
+  readingTime: {
     text: string;
   };
 };
@@ -13,7 +13,7 @@ type BlogHeaderProps = {
 const BlogHeader: React.FC<BlogHeaderProps> = ({ title, publishedAt, tags, readingTime }) => {
   return (
     <div className=" border-b-2 pb-4 border-dashed border-gray-400">
-      <div className="flex mt-2">
+      <div className="flex mt-2 gap-x-3">
         {tags.map((tag, i) => {
           return <LambdaTag key={i} tag={tag}></LambdaTag>;
         })}
