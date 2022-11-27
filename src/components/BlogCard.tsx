@@ -19,7 +19,7 @@ const BlogCard: React.FC<BlogType> = (blog) => {
         <div className="flex h-full">
           <div className="">
             <img
-              className="w-12 object-fit sm:w-40 sm:object-cover h-full" 
+              className="w-32 object-fit sm:w-40 sm:object-cover h-full"
               src={`/assets/${image}`}
               alt={title}
               />

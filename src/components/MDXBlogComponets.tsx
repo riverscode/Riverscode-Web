@@ -12,9 +12,11 @@ export const MDXBlogComponets = {
   ),
   a: (props: JSX.IntrinsicAttributes & ClassAttributes<HTMLAnchorElement> & AnchorHTMLAttributes<HTMLAnchorElement>) => (
     <a
-      className="text-emerald-500 font-bold hover:text-emerald-300"
+      className="text-emerald-500 font-bold hover:text-purple-700 transition-all duration-300"
       {...props}
     />
   ),
+  li: (props: JSX.IntrinsicAttributes & ClassAttributes<HTMLLIElement> & HTMLAttributes<HTMLLIElement>) => (
+    <li className="text-md md:text-xl mt-6" {...props} />),
   p: (props: JSX.IntrinsicAttributes & ClassAttributes<HTMLParagraphElement> & HTMLAttributes<HTMLParagraphElement>) => <p className="text-md md:text-xl mt-6" {...props} />,
 };

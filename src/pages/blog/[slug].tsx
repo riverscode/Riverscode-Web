@@ -5,19 +5,18 @@ import { MDXRemote } from "next-mdx-remote";
 import { getFiles, getFilesBySlug } from "../../lib/mdx";
 import BlogHeader from "../../components/BlogHeader";
 import { FacebookProvider, Comments } from "react-facebook";
-import Link from "next/link";
 import { GetStaticProps } from 'next'
 import SharedPost from "../../components/SharePost";
 
 interface BlogProps {
   source: any;
   frontMatter: {
-    slug: string; 
+    slug: string;
     title: string;
-    summary: string;  
+    summary: string;
     publishedAt: string;
-    tags: []; 
-    readingTime: { text: string}; 
+    tags: [];
+    readingTime: { text: string};
     cover: string
   };
 }
@@ -64,7 +63,7 @@ const BlogItem: React.FC<BlogProps> = ({ source, frontMatter }) => {
             </FacebookProvider>
           </div>
         </div>
-        
+
         </>
       </Layout>
     </>
