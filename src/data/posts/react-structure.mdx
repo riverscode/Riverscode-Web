@@ -1,0 +1,174 @@
+---
+title: "Estructura de un proyecto React"
+summary: "Como estructurar tu proyecto de React con buenas practicas."
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2022-11-24"
+image: "react.png"
+tags:
+  - "⚛ React"
+references:
+    link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "draft"
+---
+
+Todos buscamos crear nuestro proyecto de React de la mejor manera posible, pero a veces no sabemos como hacerlo, por eso en este post te voy a mostrar como estructurar tu proyecto de React con buenas practicas.
+
+> **Consideraciones** para este post divide los proyectos de react en 3 tipos en función a su longitud. Proyectos pequeños, medianos y grandes, dado que no todos los proyectos tienen la misma complejidad.
+
+
+
+### 🐥 Proyecto Pequeño
+
+```bash
+├── 📁 node_modules
+├── 📁 public
+├── 📁 src
+│   ├── 📁 assets
+│   ├── 📁 pages
+│   │   ├── 📁 home
+│   │   │   ├── 📁 componentes
+│   │   │   ├── 📃 Home.test.tsx
+│   │   │   ├── 📃 Home.tsx
+│   │   ├── 📁 login
+│   │   ├── 📁 product-description
+│   │   ├── 📁 shared
+│   │   │   ├── 📃 Button.tsx
+│   │   │   ├── 📃 Input.tsx
+│   │   │   ├── 📃 Modal.tsx
+│   │   │   ├── 📃 Navbar.tsx
+│   ├── 📁 context
+│   ├── 📁 hooks
+│   ├── 📁 services
+│   ├── 📁 utils
+├── 📃 App.css
+├── 📃 App.test.tsx
+├── 📃 App.tsx
+├── 📃 index.css
+├── 📃 index.tsx
+├── 📃 Routes.tsx
+```
+
+Todo nuestro contenido estará dentro de nuestra carpeta src, y dentro de esta carpeta vamos a tener 5 carpetas:
+
+### 📁 Pages
+Aquí vamos a tener todas las páginas de nuestra aplicación y dentro de cada carpeta vamos a tener el archivo de la página y el archivo de testeo de la página.
+- Ademas de una carpeta llamada componentes donde vamos a tener todos los componentes que se usan en esa página.
+
+> Estamos creando una carpeta de shared dado que aqui vamos a tener componentes que se van a usar en varias páginas.
+
+### 📁 context
+Aquí vamos a tener todos los contextos de nuestra aplicación. Los contextos son una forma de compartir información entre componentes sin tener que pasar props a través de todos los componentes intermedios.
+
+### 📁 hooks
+
+Aquí vamos a tener todos los hooks de nuestra aplicación. Los hooks son una forma de reutilizar el estado lógica entre componentes. Podríamos utilizar los hooks para obtener datos, manipular el localStorage, etc.
+
+### 📁 services
+
+Aquí vamos a tener todos los servicios de nuestra aplicación. Los servicios son una forma de encapsular la lógica de comunicación con el backend.
+
+### 📁 utils
+
+Aquí vamos a tener todos los archivos de utilidad de nuestra aplicación. Los archivos de utilidad son una forma de encapsular la lógica que se puede reutilizar en varios lugares de la aplicación. Por ejemplo, podríamos tener un archivo de utilidad para validar formularios, para formatear fechas, etc.
+
+> En este tipo de proyecto podríamos hablar de un equipo hasta 3 personas dada la baja complejidad. En este tipo de proyecto no es necesario tener una estructura tan compleja, pero si es necesario tener una estructura que nos permita tener un código limpio y ordenado.
+
+### 😽 Proyecto Mediano
+
+```bash
+├── 📁 node_modules
+├── 📁 public
+├── 📁 src
+│   ├── 📁 assets
+│   ├── 📁 components
+│   │   ├── 📁 Button
+│   │   │   ├── 📃 Button.test.tsx
+│   │   │   ├── 📃 Button.tsx
+│   │   ├── 📁 Input
+│   │   ├── 📁 Modal
+│   │   ├── 📁 Navbar
+│   ├── 📁 features
+│   │   ├── 📁 comments
+│   │   ├── 📁 cart
+│   │   ├── 📁 products
+│   ├── 📁 pages
+│   ├── 📁 layout
+│   ├── 📁 store
+│   │   ├── 📁 comments
+│   │   │   ├── 📃 actions.ts
+│   │   │   ├── 📃 reducers.ts
+│   │   │   ├── 📃 selectors.ts
+│   │   │   ├── 📃 store.ts
+│   │   ├── 📁 cart
+│   ├── 📁 hooks
+│   ├── 📁 services
+│   ├── 📁 utils
+├── 📃 App.css
+├── 📃 App.test.tsx
+├── 📃 App.tsx
+├── 📃 index.css
+├── 📃 index.tsx
+├── 📃 Routes.tsx
+```
+### 📁 components
+
+Ahora hemos convertido nuestra carpeta de shared que teníamos en nuestra estructura básica en una carpeta de componentes.  Aquí vamos a tener componentes que se van a usar en varias páginas.
+
+### 📁 features
+
+Dentro de features vamos a tener componentes que se van a usar en varias páginas y que tienen una lógica compleja. Por ejemplo, podríamos tener un componente de carrito de compras que se va a usar en varias páginas y que tiene una lógica compleja.
+
+> Es complejo entender la diferencia entre componentes y features, pero en general, los componentes son componentes que se van a usar en varias páginas y que no tienen una lógica compleja. Los features son componentes que se van a usar en varias páginas y que tienen una lógica compleja.
+
+### 📁 pages
+
+Aquí vamos a tener todas las páginas de nuestra aplicación y dentro de cada carpeta vamos a tener el archivo de la página y el archivo de testeo de la página.
+
+- Aquí haremos uso de la carpeta de features y components.
+
+### 📁 layout
+
+Aquí tendremos el diseño global de una pagina. Por ejemplo, podríamos tener un layout para la página de inicio, un layout para la página de login, etc.
+
+### 📁 store
+
+A diferencia de los contextos, los stores son globales y no se pueden usar en cualquier parte de la aplicación. A opinion personal el uso de Redux es un poco exagerado para proyectos pequeños, pero si es necesario para proyectos medianos y grandes.
+
+### 🐲 Proyecto Grande
+
+```bash
+├── 📁 node_modules
+├── 📁 public
+├── 📁 src
+│   ├── 📁 modules
+│   │   ├── 📁 home
+│   │   │   ├── 📁 assets
+│   │   │   ├── 📁 components
+│   │   │   ├── 📁 features
+│   │   │   ├── 📁 pages
+│   │   │   ├── 📁 layout
+│   │   │   ├── 📁 store
+│   │   │   ├── 📁 hooks
+│   │   │   ├── 📁 services
+│   │   │   ├── 📁 utils
+│   │   │   ├── 📃 index.ts
+│   │   ├── 📁 login
+│   │   ├── 📁 product-description
+│   │   ├── 📁 shared
+├── 📃 App.css
+├── 📃 App.test.tsx
+├── 📃 App.tsx
+├── 📃 index.css
+├── 📃 index.tsx
+├── 📃 Routes.tsx
+```
+
+En este tipo de proyecto lo manejaremos todo como **modules** donde cada modulo representa una pagina de nuestro proyecto. Dentro de cada modulo tendremos las carpetas de components, features, pages, layout, store, hooks, services y utils que resulta las mismas carpetas que teníamos en el proyecto mediano.
+
+> Hay que considerar que este tipo de proyecto esta más enfocado a equipos grandes donde la division de tareas es muy importante. Esta division de tareas es muy importante para que el código sea escalable evitando que los equipos interfieran entre si. Pero aun asi poder compartir funcionalidades, componentes, etc. dentro de la carpeta de shared.
+
+## Conclusión
+
+En este articulo hemos visto como estructurar un proyecto de ReactJS a diferente escala, pero un proyecto podría iniciar como un proyecto pequeño y transformarse en un proyecto grande. Por eso es importante tener una estructura que nos permita tener un código escalable y limpio. Para eso hemos visto que podemos convertir la estructura de un proyecto pequeño a un proyecto mediano con pocos cambios y que podemos convertir la estructura de un proyecto mediano a un proyecto grande de la misma manera.
+
