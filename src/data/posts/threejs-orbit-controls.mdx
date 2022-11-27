@@ -1,0 +1,121 @@
+---
+title: "Controles - Orbit Control en Three.js"
+summary: "Aprenderemos usar Orbit control en Three.js para poder interactuar con la escena."
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2022-11-26"
+image: "threejs.webp"
+tags:
+  - "💻 Three.js "
+  - "⚛ React.js"
+references:
+  link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "draft"
+---
+
+Los controles son una parte importante de cualquier aplicación en three.js dado que nos permiten interactuar con la escena. En este post aprenderemos a usar Orbit control en Three.js para poder realizar, a partir de un punto de ancla, rotaciones, zooms o mover el plano de la escena.
+
+## Importar OrbitControls
+
+Para poder usar OrbitControls en Three.js debemos importar de la carpeta **three/examples/jsm/controls/OrbitControls** posteriomente dentro de nuestro useEffect debemos instanciar el control y pasarle como parámetros la cámara y el canvas.
+
+```jsx:Sceme.jsx
+import React, { useRef, useEffect } from "react";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
+const OrbitControls = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+
+    // ### Instanciar OrbitControls ###
+    const controls = new OrbitControls(camera, renderer.domElement);
+
+  }, []);
+
+};
+```
+
+Una vez que hemos agregado el control a nuestra escena aun no vamos a poder interactuar con la misma, para poder hacerlo debemos agregar **frames** a nuestro useEffect, específicamente al renderer de nuestra scene y para eso crearemos un método animate.
+
+```jsx:Sceme.jsx
+import React, { useRef, useEffect } from "react";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
+const OrbitControls = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+
+    // ### Instanciar OrbitControls ###
+    const controls = new OrbitControls(camera, renderer.domElement);
+
+    // ### Agregar frames ###
+    const animate = () => {
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate); // Agregar frames
+    };
+
+    animate();
+
+  }, []);
+
+};
+```
+
+## Configuración de OrbitControls
+
+Ahora que ya tenemos OrbitControls en nuestra escena podemos configurarlos para que se adapten a nuestras necesidades. Entre las propiedades más importantes que podemos configurar tenemos:
+
+- [💎 target:](https://threejs.org/docs/#examples/en/controls/OrbitControls.target) Es el punto de ancla alrededor del cual se va a realizar la rotación.
+- [💎 enableDamping](https://threejs.org/docs/#examples/en/controls/OrbitControls.enableDamping): Es un booleano que nos permite activar o desactivar el efecto de suavizado de la rotación. Por defecto es false.
+
+> **Nota:** El efecto de suavizado de la rotación es un efecto que se aplica a la rotación para que esta se vea más suave. Para activarlo dentro de nuestro método animate debemos agregar controls.update();
+
+```jsx:Sceme.jsx
+import React, { useRef, useEffect } from "react";
+import * as THREE from "three";
+import { OrbitControls } from "three/examples/jsm/controls/OrbitControls";
+
+const OrbitControls = () => {
+  const canvasRef = useRef(null);
+
+  useEffect(() => {
+
+    // ### Instanciar OrbitControls ###
+    const controls = new OrbitControls(camera, renderer.domElement);
+
+    // ### Configuración de OrbitControls ###
+    control.targe = new THREE.Vector3(0, 3, 0); // Punto de ancla de la rotación
+    controls.enableDamping = true; // Activa el efecto de inercia
+    controls.dampingFactor = 0.05; // Fuerza del efecto de inercia
+    controls.enableZoom = true; // Activa el zoom
+    controls.enablePan = true; // Activa el pan
+    controls.enableRotate = true; // Activa la rotación
+    controls.autoRotate = false; // Activa la rotación automática
+    controls.autoRotateSpeed = 0.2; // Velocidad de rotación automática
+    controls.minDistance = 1; // Distancia mínima de zoom
+    controls.maxDistance = 5; // Distancia máxima de zoom
+    controls.minPolarAngle = 0; // Ángulo mínimo de rotación
+    controls.maxPolarAngle = Math.PI; // Ángulo máximo de rotación
+    controls.minAzimuthAngle = -Infinity; // Ángulo mínimo de rotación
+    controls.maxAzimuthAngle = Infinity; // Ángulo máximo de rotación
+
+    // ### Agregar frames ###
+    const animate = () => {
+      controls.update(); // Actualiza el control
+      renderer.render(scene, camera);
+      requestAnimationFrame(animate); // Agregar frames
+    };
+
+    animate();
+
+  }, []);
+
+};
+```
+
+
+
