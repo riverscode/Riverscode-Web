@@ -1,0 +1,149 @@
+---
+title: "Uso de materiales en three.js"
+summary: "Aprenderemos usar los materiales dentro de three.js."
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2022-11-28"
+image: "threejs.webp"
+tags:
+  - "💻 Three.js "
+  - "⚛ React.js"
+references:
+  link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "ready"
+---
+
+Existen diferentes tipos de materiales en three.js, los cuales podemos usar para darle un aspecto a nuestros objetos. En este post aprenderemos a usarlos.
+
+## MeshBasicMaterial [🔗](https://threejs.org/docs/#api/en/materials/MeshBasicMaterial)
+
+Este material es el más simple de todos, ya que solo le da un aspecto plano a nuestro objeto, sin luces ni sombras. Este material es útil cuando queremos crear un objeto que no necesite luces ni sombras, como por ejemplo un plano de fondo.
+
+Los parámetros que podemos usar son:
+
+- 🎨 **color:** Color del material.
+- 🕶 **opacity:** Opacidad del material.
+- 👓 **transparent:** Si el material es transparente o no.
+- 🕸 **wireframe:** Si es true, el material se verá como un wireframe.
+
+
+```jsx:Scene.jsx
+const material = new THREE.MeshBasicMaterial(
+  { color: 0x00ff00 ,
+    wireframe: false,
+    transparent: true,
+    opacity: 0.5
+  }
+);
+```
+
+> Hay muchas formas de crear un color en three.js, en este caso usamos el hexadecimal <span style={{background:"#00ff00", padding: "0 5px", borderRadius: "5px"}}>0x00ff00 </span>, que es el color verde. En futuras publicaciones profundizaremos más en los colores.
+
+## MeshNormalMaterial [🔗](https://threejs.org/docs/#api/en/materials/MeshNormalMaterial)
+
+Este material es muy útil para ver la normal de cada vértice de nuestro objeto. Esto nos puede ayudar a ver si nuestro objeto está bien modelado.
+
+Los parámetros que podemos usar son:
+
+- 🕸 **wireframe:** Si es true, el material se verá como un wireframe.
+- 🎇 **flatShading:** Si es true, el material se verá con flat shading.
+
+
+```jsx:Scene.jsx
+const material = new THREE.MeshNormalMaterial(
+  {
+    flatShading: true
+    wireframe: false,
+  }
+);
+```
+
+## MeshMatcapMaterial [🔗](https://threejs.org/docs/#api/en/materials/MeshMatcapMaterial)
+
+Este material es muy útil para crear materiales que se vean como si estuvieran hechos de arcilla. Para usar este material necesitamos una textura que se llame matcap, la cual podemos encontrar en varios sitios web. un ejemplo de sitios web es [Github Matcaps](https://github.com/nidorx/matcaps).
+
+Los parámetros que podemos usar son:
+
+- 🎨 **matcap:** Textura que usaremos para el material.
+- 🕸 **wireframe:** Si es true, el material se verá como un wireframe.
+
+Lo primero que tenemos que hacer es importar el texture loader de three.js, el cual nos ayudará a cargar la textura que usaremos para el material.
+
+```jsx:Scene.jsx
+const TextureLoader = new THREE.TextureLoader();
+const matcapTexture = TextureLoader.load('./matcaps/8.png');
+
+const material = new THREE.MeshMatcapMaterial(
+  {
+    matcap: matcapTexture,
+    wireframe: false
+  }
+);
+```
+
+## MeshStandardMaterial [🔗](https://threejs.org/docs/#api/en/materials/MeshStandardMaterial)
+
+Este material es el más usado en three.js, ya que nos permite crear materiales que se vean muy realistas. Este material tiene luces y sombras, y podemos usarlo para crear objetos que se vean como si estuvieran hechos de metal, madera, plástico, etc.
+
+> Este tipo de materiales necesitamos de una luz para que se vean correctamente. En futuras publicaciones profundizaremos más en las luces 💡.
+
+Momentáneamente crearemos una luz ambiental para que se vea el material.
+
+```jsx:Scene.jsx
+// Crear una luz ambiental
+const ambientLight = new THREE.AmbientLight(0xffffff, 0.5);
+// Agregar la luz a la escena
+scene.add(ambientLight);
+```
+Para agregar texturas podemos hacer uso a diferentes sitios webs, como por ejemplo [PBR Textures](https://3dtextures.me/). Estas texturas tienen diferentes maps por ejemplo Diffuse, Normal, Displacement, Roughness, Ambient Occlusion, etc. Estos maps nos ayudan a darle más realismo a nuestro material.
+
+- 🏉 **baseColor:** Textura que usaremos para el color del material.
+- 🏉 **aoMap:** Textura que usaremos para el mapa de ambient occlusion. Este mapa nos ayuda a darle sombras a nuestro material.
+- 🏉 **displacementMap:** Textura que usaremos para el mapa de desplazamiento. Permite darle un efecto de relieve a nuestro material.
+- 🏉 **normalMap:** Textura que usaremos para el mapa de normales. Permite a darle mayor detalle a nuestro material.
+- 🏉 **roughnessMap:** Textura que usaremos para el mapa de roughness. Este mapa nos ayuda a darle brillo a nuestro material.
+- 🏉 **metalnessMap:** Textura que usaremos para el mapa de metalness. Este mapa nos ayuda a darle metalicidad a nuestro material.
+
+```jsx:Scene.jsx
+// Importar el texture loader
+const TextureLoader = new THREE.TextureLoader();
+// Cargar las texturas
+const baseColorTexture = TextureLoader.load('./textures/bricks/color.jpg');
+const aoMap = TextureLoader.load('./textures/bricks/ambientOcclusion.jpg');
+const displacementTexture = TextureLoader.load('./textures/bricks/displacement.png');
+const normalTexture = TextureLoader.load('./textures/bricks/normal.jpg');
+const roughnessTexture = TextureLoader.load('./textures/bricks/roughness.jpg');
+const metalnessTexture = TextureLoader.load('./textures/bricks/metalness.jpg');
+
+const material = new THREE.MeshStandardMaterial(
+  {
+    map: baseColorTexture,
+    aoMap: aoMap,
+    normalMap: normalTexture,
+    roughnessMap: roughnessTexture,
+    metalnessMap: metalnessTexture,
+    displacementMap: displacementTexture,
+    displacementScale: 0.1,
+  }
+);
+```
+
+Posiblemente no lleguemos a notar la diferencia al aplicar el displacementMap, pero si sobre nuestro objeto agregamos mas segmentos, veremos que el efecto de relieve se ve mejor.
+
+```jsx:Scene.jsx
+const cube = new THREE.Mesh(
+  new THREE.BoxGeometry(
+    width: 0.5,
+    height: 64,
+    depth: 64,
+    widthSegment: 64,
+    heightSegment: 64,
+    depthSegment: 64),
+  material
+);
+```
+
+> Este material es el que más parámetros tiene, por lo que en futuras publicaciones profundizaremos más en cada uno de ellos. Preparare una sección especial solo para este material.
+
+
+

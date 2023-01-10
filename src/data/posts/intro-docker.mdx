@@ -1,0 +1,167 @@
+---
+title: "Introducción a Docker"
+summary: "Entendiendo docker y sus beneficios"
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2023-01-10"
+image: "docker.jpg"
+tags:
+  - "📦 Docker"
+references:
+    link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "ready"
+---
+
+Docker es una plataforma de código abierto que permite crear, probar e implementar aplicaciones rápidamente. Docker facilita la creación de contenedores de software que se pueden ejecutar en cualquier máquina que tenga Docker instalado, independientemente del sistema operativo. Los contenedores de Docker se pueden crear a partir de cualquier aplicación, ya sea una aplicación nativa o una aplicación basada en la nube. Los contenedores de Docker se pueden implementar en la nube o en un entorno local.
+
+## Ecosistema de Docker
+
+### Docker Server
+
+Docker Server es un servicio que se ejecuta en una máquina virtual o en un servidor físico.
+El servidor Docker se ejecuta en un entorno de Linux y se puede instalar en cualquier distribución de Linux.
+El Docker server es el que crea los diferentes elementos de docker
+
+### Docker Engine
+
+Docker Engine se utiliza para crear contenedores de software que se pueden ejecutar en cualquier máquina que tenga Docker instalado, independientemente del sistema operativo.
+
+### Docker CLI
+
+Docker CLI es una interfaz de línea de comandos que se utiliza para interactuar con el servidor Docker.
+
+### Docker image
+
+Docker image es un archivo de solo lectura que contiene una imagen de sistema de archivos y los parámetros necesarios para ejecutar un contenedor.
+
+### Docker container
+
+Docker container es una instancia de una imagen de Docker que se ejecuta como un proceso separado. Un contenedor Docker se puede crear, iniciar, detener, mover o eliminar.
+
+### Docker Swarm
+
+Docker Swarm es un orquestador de contenedores que se utiliza para administrar y orquestar múltiples contenedores Docker en un clúster.
+
+### Docker Compose
+
+Docker Compose es una herramienta de línea de comandos que se utiliza para definir y ejecutar aplicaciones Docker de múltiples contenedores.
+
+### Volume
+
+Los volúmenes son los directorios que se utilizan para almacenar datos persistentes de los contenedores. Los volúmenes se pueden montar en un contenedor y se pueden compartir entre contenedores.
+
+### Network
+
+Las redes que se utilizan para conectar los contenedores entre sí y con el exterior.
+
+## Docker Desktop
+
+El docker desktop es una aplicación que se instala en el sistema operativo de la máquina local. La aplicación Docker Desktop se utiliza para crear, probar e implementar aplicaciones Docker.
+
+Pueden encontrar el instalador de docker desktop en el siguiente enlace: [Pagina oficial de Docker](https://www.docker.com/products/docker-desktop)
+
+> Podemos verificar que docker esta instalado en nuestra computadora con el el comando ```docker --version``` en la terminal, si nos muestra la versión de docker, significa que esta instalado correctamente.
+
+## Imágenes de Docker
+
+Para instalar una imagen de docker, debemos ejecutar el siguiente comando:
+
+```bash:bash
+docker pull <nombre de la imagen>:<tag>
+```
+> Pueden encontrar la lista de las imágenes de docker disponible en el siguiente enlace: [Docker Hub](https://hub.docker.com/)
+
+Para listar las lista de imágenes que tengo instalado en mi computadora puedo usar el comando:
+
+```bash:bash
+docker images
+```
+Pueden eliminar una imagen usando el comando ```docker rmi <nombre de la imagen>```
+
+## Contenedores de Docker
+
+Para crear un contenedor de docker, debemos ejecutar el siguiente comando:
+
+```bash:bash
+docker create --name <nombre del contenedor> <nombre de la imagen>:<tag>
+```
+> Para ver las características de un contenedor podemos usar el comando ``` docker inspect <nombre del contenedor | identificador del contenedor> ```
+
+> Para listar los contenedores que tengo instalado en mi computadora puedo usar el comando ``` docker ps ```, pero este comando solo me mostrara los contenedores que se están ejecutando. En caso de querer ver todos los contenedores que tengo instalado en mi computadora, puedo usar el comando ``` docker ps -a ```
+
+Para iniciar un contenedor de docker, debemos ejecutar el siguiente comando:
+
+```bash:bash
+docker start <nombre del contenedor | identificador del contenedor>
+```
+> Muchas veces vamos a tener errores al momento de ejecutar un contenedor, para ver los errores podemos usar el comando ``` docker logs <nombre del contenedor | identificador>  ```
+
+Para detener un contenedor de docker, debemos ejecutar el siguiente comando:
+
+```bash:bash
+docker stop <nombre del contenedor | identificador del contenedor>
+```
+
+Para eliminar un contenedor de docker, debemos ejecutar el siguiente comando:
+
+```bash:bash
+docker rm <nombre del contenedor | identificador del contenedor>
+```
+> Si queremos eliminar todos los contenedores que tenemos instalado en nuestra computadora, podemos usar el comando ``` docker rm $(docker ps -a -q) ```
+
+> Si queremos eliminar un contenedor que se encuentra corriendo, podemos usar el comando ``` docker rm -f <nombre del contenedor | identificador del contenedor> ```
+
+## Variables de entorno
+
+Dentro de docker podemos definir variables de entorno anteponiendo ```-e <nombre de la variable>=<valor de la variable>```, por ejemplo:
+
+```bash:bash
+docker run -e <nombre de la variable>=<valor de la variable> <nombre de la imagen>:<tag>
+```
+
+## Puertos
+
+Los puertos son los puertos que se utilizan para comunicarse con el contenedor. Cada contenedor tiene un puerto por defecto, pero podemos cambiarlo. Utilizamos el mapping de puertos para poder acceder a los puertos del contenedor desde el exterior.
+
+Dentro de docker podemos definir los puertos que vamos a utilizar anteponiendo ```-p <puerto local>:<puerto del contenedor>```, por ejemplo:
+
+```bash:bash
+docker run --name <nombre del contenedor> -p <puerto local>:<puerto del contenedor> <nombre de la imagen>:<tag>
+```
+
+> Usando ``` docker inspect <nombre del contenedor> ``` podemos ver los puertos que tiene el contenedor. Ademas podemos obtener la ip que docker le asignado al contenedor.
+
+## Volúmenes
+
+Los volúmenes son los directorios que se utilizan para almacenar datos persistentes de los contenedores. Los volúmenes se pueden montar en un contenedor y se pueden compartir entre contenedores.
+
+### Tipos de Volúmenes
+
+#### Volúmenes anónimos:
+
+Son los volúmenes que se crean cuando se ejecuta un contenedor. Los volúmenes anónimos se eliminan cuando se elimina el contenedor.
+
+```bash:bash
+docker run --name <nombre del contenedor> -v <ruta del directorio del contenedor> <nombre de la imagen>:<tag>
+```
+
+> En caso queramos eliminar el volumen junto con el contenedor podemos usar el comando ``` docker rm -fv <nombre del contenedor> ```
+
+#### Volúmenes nombrados:
+
+Son los volúmenes que se crean cuando se ejecuta un contenedor. Los volúmenes nombrados no se eliminan cuando se elimina el contenedor.
+
+```bash:bash
+docker volume create <nombre del volumen>
+docker run --name <nombre del contenedor> -v <nombre del volumen>:<ruta del directorio del contenedor> <nombre de la imagen>:<tag>
+```
+
+#### Volúmenes host:
+
+Son los volúmenes que se crean cuando se ejecuta un contenedor. Los volúmenes externos no se eliminan cuando se elimina el contenedor.
+
+```bash:bash
+docker run --name <nombre del contenedor> -v <ruta del directorio local>:<ruta del directorio del contenedor> <nombre de la imagen>:<tag>
+```
+
+Podemos inspeccionar los volumes con el comando ``` docker volume inspect <nombre del volumen> ``` aquí podríamos encontrar la ruta de la carpeta donde esta el volumen.
