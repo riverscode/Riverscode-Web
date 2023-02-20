@@ -11,18 +11,92 @@ references:
     link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
 status: "ready"
 ---
+
+## Básicos
+
+### Configuración especifica de usuario
+
+```bash:terminal
+git config --global user.name "Rivers Code"
+git config --global user.email "riverscode@gmail.com"
+```
+
+### Configuración global
+
+```bash:terminal
+git config --global core.editor "code --wait"
+git config --global color.ui true
+git config --global init.defaultBranch main
+```
+### Ver la configuración
+
+```bash:terminal
+git config --list
+```
+
+### Crear alias para comandos
+
+```bash:terminal
+git config --global alias.co checkout
+git config --global alias.br branch
+git config --global alias.ci commit
+git config --global alias.st status
+```
+
+### Inicializar un repositorio
+
+```bash:terminal
+git init
+```
+
+## Rebase
+
+Git rebase se usa para aplicar los cambios de una rama a otra. Por ejemplo, si estás trabajando en una rama y quieres agregar los cambios de otra rama a la tuya, puedes usar git rebase para agregar los cambios de la otra rama a la tuya.
+
+### Cómo rebase
+
+```bash:terminal
+git rebase nombre-rama
+```
+
+## Revertir cambios
+
+### Revertir un commit
+
+```bash:terminal
+git revert id-commit
+```
+
+### Revertir un commit con un mensaje
+
+```bash:terminal
+git revert -m 1 id-commit
+```
+
+### Devolve todo al principio del rebase
+
+```bash:terminal
+git rebase --abort
+```
+
 ## Trabajar con ramas
 
 ### Crear una rama
 
 ```bash:terminal
-git checkout -b nombre-rama
+git branch nombre-rama
 ```
 
 ### Cambiar de rama
 
 ```bash:terminal
 git checkout nombre-rama
+```
+
+### Crear y cambiar en nueva rama
+
+```bash:terminal
+git checkout -b nombre-rama
 ```
 
 ### Eliminar una rama
@@ -78,3 +152,42 @@ git stash apply
 git stash pop
 ```
 
+## tags
+
+Los tags son etiquetas que se pueden aplicar a un commit específico. Los tags se utilizan para marcar puntos específicos en la historia de un proyecto, como versiones de lanzamiento, por ejemplo.
+
+### Cómo crear un tag
+
+```bash:terminal
+git tag -a v1.0.0 -m "Versión 1.0.0"
+```
+
+### Cómo ver los tags
+
+```bash:terminal
+git tag
+```
+
+### Cómo ver los tags y sus commits
+
+```bash:terminal
+git tag -n
+```
+
+### Enviar tags a github
+
+```bash:terminal
+git push origin --tags
+```
+### Estado del repositorio
+
+```bash:terminal
+git status -s
+```
+
+### Listado de commits
+
+  ```bash:terminal
+  git log --graph --decorate --oneline --all
+  ```
+##

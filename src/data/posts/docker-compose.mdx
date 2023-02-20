@@ -1,0 +1,79 @@
+---
+title: "Orquestación de containers con Docker compose"
+summary: "Orquestación con Docker compose"
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2023-01-13"
+image: "docker.jpg"
+tags:
+  - "📦 Docker"
+references:
+    link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "draft"
+---
+
+## Docker compose
+
+Docker compose es una herramienta que nos permite orquestar contenedores de Docker. Es decir, nos permite crear y gestionar varios contenedores a la vez.
+
+podemos crear un archivo docker-compose.yml que nos permita definir los contenedores que queremos crear y sus configuraciones.
+
+```yml:docker-compose.yml
+version: "3.9"
+
+services:
+  mysql-server:
+    image: mysql:8
+    container_name: mysql-server
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: db
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+    ports:
+      - "3306:3306"
+    network:
+      - mysql-network
+    volumes:
+      - data-mysql-nodejs11-vol:/var/lib/mysql
+networks:
+  mysql-network:
+    driver: bridge
+volumes:
+  data-mysql-nodejs11-vol:
+```
+### Ejecutar un docker compose
+
+```bash:terminal
+docker-compose up
+```
+
+> Si no deseamos que se ejecute en segundo plano, podemos agregar la opción -d al final del comando. ```bash docker-compose up -d ```
+
+### Ver los contenedores que se están ejecutando
+
+```bash:terminal
+docker-compose ps
+```
+### Detener un docker compose
+
+```bash:terminal
+docker-compose down
+```
+
+### Para ejecutar solamente algunos servicios
+
+```bash:terminal
+docker-compose up <nombre del servicio 1> <nombre del servicio 2>
+```
+
+### Para ejecutar todos los servicios excepto algunos
+
+```bash:terminal
+docker-compose up --no-deps <nombre del servicio 1> <nombre del servicio 2>
+```
+
+> En caso el archivo docker-compose.yml se llame de otra forma, podemos especificar el nombre del archivo con la opción -f. ```bash docker-compose -f <nombre del archivo> up 
+
+
+
