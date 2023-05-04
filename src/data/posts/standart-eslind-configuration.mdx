@@ -1,0 +1,120 @@
+---
+title: "Configuración de Standard en vitejs"
+summary: "Aprenderemos a configurar eslint con standard en vitejs"
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2023-05-04"
+image: "eslint.webp"
+tags:
+  - "💻 Three.js "
+  - "⚛ React.js"
+references:
+  link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "ready"
+---
+
+
+### ¿Qué es Eslint?
+
+ESLint es una herramienta de linting para JavaScript. Un linter es una herramienta que analiza el código fuente para señalar errores de programación, errores estilísticos y constructos sospechosos. Esta herramienta se puede utilizar para evitar errores de programación y para asegurar la consistencia del código.
+
+### ¿Qué es Standard?
+
+Standard es un linter para JavaScript y TypeScript que se ejecuta en Node.js. Es compatible con JavaScript ES2011 y versiones posteriores, así como con TypeScript 3.5 y versiones posteriores. Standard es rápido, liviano, y se integra con la mayoría de los editores de texto.
+
+## Procedimiento para configurar
+
+### Instalar ts-standard
+
+```bash
+npm install -D ts-standard
+```
+
+### Agregar ts-standard a eslintrc.cjs
+
+```js:eslintrc.cjs
+module.exports = {
+  env: { browser: true, es2020: true },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    './node_modules/ts-standard/eslintrc.json'
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
+  plugins: ['react-refresh'],
+  rules: {
+    'react-refresh/only-export-components': 'warn',
+  },
+}
+```
+
+### Agregar el proyecto en parserOptions
+
+```js:eslintrc.cjs
+module.exports = {
+  env: { browser: true, es2020: true },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    './node_modules/ts-standard/eslintrc.json'
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module', project: './tsconfig.json' },
+  plugins: ['react-refresh'],
+  rules: {
+    'react-refresh/only-export-components': 'warn',
+  },
+}
+```
+### Incluir eslintrc.cjs dentro del archivo tsconfig.json
+
+```json:eslintrc.json
+{
+  "compilerOptions": {
+    "target": "ESNext",
+    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "module": "ESNext",
+    "skipLibCheck": true,
+
+    /* Bundler mode */
+    "moduleResolution": "bundler",
+    "allowImportingTsExtensions": true,
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react-jsx",
+
+    /* Linting */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "noFallthroughCasesInSwitch": true
+  },
+  "include": ["src", "eslintrc.cjs"],
+  "references": [{ "path": "./tsconfig.node.json" }]
+}
+```
+
+### Desactivar la reglas
+
+```js:eslintrc.cjs
+module.exports = {
+  env: { browser: true, es2020: true },
+  extends: [
+    'eslint:recommended',
+    'plugin:@typescript-eslint/recommended',
+    'plugin:react-hooks/recommended',
+    './node_modules/ts-standard/eslintrc.json'
+  ],
+  parser: '@typescript-eslint/parser',
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module', project: './tsconfig.json' },
+  plugins: ['react-refresh'],
+  rules: {
+    'react-refresh/only-export-components': 'warn',
+    '@typescript-eslint/explicit-function-return-type': 'off',
+  },
+}
+```
