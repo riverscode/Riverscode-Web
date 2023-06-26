@@ -1,0 +1,523 @@
+---
+title: "Un viaje a través de TypeScript"
+summary: "Descubre los conceptos esenciales de TypeScript y ejemplos prácticos en este completo post. Aprende a potenciar tu código JavaScript con tipado estático y características avanzadas. Perfecto para principiantes y desarrolladores experimentados."
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2023-06-25"
+image: "typescript.webp"
+tags:
+  - 💙 Typescript"
+status: "ready"
+---
+
+
+En el apasionante mundo del desarrollo web, TypeScript se ha convertido en una herramienta imprescindible para llevar nuestro código JavaScript al siguiente nivel. ¿Qué es TypeScript? Es un lenguaje de programación que se basa en JavaScript y agrega el poder del tipado estático y otras características avanzadas. En este post, exploraremos a fondo TypeScript, desde sus conceptos fundamentales hasta técnicas más avanzadas, para que puedas aprovechar al máximo esta poderosa herramienta.
+
+¿Por qué TypeScript se ha vuelto tan popular? Los beneficios son claros: el tipado estático nos ayuda a detectar errores en tiempo de compilación, mejorar la calidad del código y facilitar el mantenimiento a largo plazo. Además, TypeScript nos brinda un conjunto de características adicionales, como las interfaces, las clases y los módulos, que nos permiten escribir código más estructurado y modular.
+
+En este post, nos sumergiremos en el fascinante mundo de TypeScript. Veremos los conceptos esenciales, desde los tipos de datos y variables hasta las funciones y parámetros. Exploraremos el uso de interfaces y tipos personalizados, y profundizaremos en las clases y la herencia. También aprenderemos sobre los módulos y namespaces, y exploraremos anotaciones de tipo avanzadas para casos especiales. ¡Prepárate para un recorrido completo por TypeScript, donde te proporcionaremos ejemplos sencillos y prácticos para cada tema!
+
+## TEMAS A TRATAR
+
+### Temas completados
+- 📘 Tipado en typescript
+- 📘 Modificadores de acceso
+- 📘 Inmutabilidad
+- 📘 Herencia
+
+### Temas pendientes
+- 📕 Composición
+- 📕 Dependencia ocultas
+- 📕 Getter y Setter
+- 📕 Protected
+- 📕 Interfaces
+- 📕 Helpers en interfaces
+- 📕 Tipos
+- 📕 Tipos vs Interfaces
+- 📕 Union de interfaces
+- 📕 Genéricos
+
+### Tipado en typescript
+
+La adición del tipado estático en TypeScript proporciona varios beneficios significativos. En primer lugar, nos permite detectar y corregir errores en tiempo de compilación en lugar de tiempo de ejecución, lo que resulta en un código más robusto y confiable. Además, el tipado estático mejora la legibilidad del código, ya que los tipos de datos esperados están explícitamente declarados.
+
+```ts:tipado.ts
+let edad: number;
+edad = 25; // ✅ Correcto
+edad = 'treinta'; // ❌ Type 'string' is not assignable to type 'number'
+```
+En este ejemplo, declaramos una variable llamada "edad" y le asignamos el tipo "number". Esto significa que la variable "edad" solo puede contener valores numéricos. Si intentamos asignarle una cadena de texto como 'treinta', el compilador de TypeScript nos mostrará un error de compilación, ya que el tipo de dato es incorrecto.
+
+#### Tipos implícitos y explícitos
+
+En TypeScript, los tipos pueden ser implícitos o explícitos. Los tipos implícitos son inferidos por el compilador de TypeScript en función del valor asignado a la variable, mientras que los tipos explícitos son declarados directamente por el programador.
+
+```ts:implícito.ts
+let nombre = 'Juan'; // El tipo de dato se infiere como string automáticamente
+let edad = 25; // El tipo de dato se infiere como number automáticamente
+
+nombre = 'Pedro'; // ✅ Correcto
+edad = 30; // ✅ Correcto
+
+nombre = 100; // ❌ Type 'number' is not assignable to type 'string'
+edad = 'treinta'; // ❌ Type 'string' is not assignable to type 'number'
+```
+
+En este ejemplo, las variables nombre y edad se declaran sin especificar explícitamente su tipo. El compilador de TypeScript infiere automáticamente el tipo de dato en función del valor asignado a cada variable.
+
+En este caso, la variable nombre se infiere como string debido a que se le asigna un valor de texto. La variable edad se infiere como number debido a que se le asigna un valor numérico.
+
+>  Es importante tener en cuenta que el tipado explícito puede ser necesario en situaciones donde la inferencia de tipo no es suficiente o cuando se desea claridad adicional en el código.
+
+#### Uso de tipos básicos en TypeScript
+
+En TypeScript, se incluyen varios tipos básicos que nos permiten definir el tipo de datos de variables y expresiones en nuestro código. Algunos de los tipos básicos más comunes son:
+
+- number: representa valores numéricos, ya sean enteros o decimales.
+
+```ts:number.ts
+let edad: number;
+edad = 25; // ✅ Correcto
+edad = 25.5; // ✅ Correcto
+edad = 'treinta'; // ❌ Type 'string' is not assignable to type 'number'
+```
+
+- string: representa valores de texto o cadenas de caracteres.
+
+```ts:string.ts
+let nombre: string;
+nombre = 'Juan'; // ✅ Correcto
+nombre = 'Pedro'; // ✅ Correcto
+nombre = 100; // ❌ Type 'number' is not assignable to type 'string'
+```
+
+- boolean: representa valores de verdadero o falso.
+
+```ts:boolean.ts
+let esMayor: boolean;
+esMayor = true; // ✅ Correcto
+esMayor = false; // ✅ Correcto
+esMayor = 'verdadero'; // ❌ Type 'string' is not assignable to type 'boolean'
+```
+- tuple: representa una colección de elementos de diferentes tipos con una longitud fija. Cada elemento del tuple tiene un tipo específico y se accede a ellos por su posición.
+
+```ts:tuple.ts
+let persona: [string, number];
+persona = ['Juan', 25]; // ✅ Correcto
+persona = [25, 'Juan']; // ❌ Type 'number' is not assignable to type 'string'
+persona = ['Juan', 25, true]; // ❌ Type 'boolean' is not assignable to type 'string | number'
+```
+
+- enum: permite definir un conjunto de valores con nombres más descriptivos. Cada valor del enum tiene un nombre y un valor numérico asociado.
+
+```ts:enum.ts
+enum Color {
+  Rojo,
+  Verde,
+  Azul,
+}
+
+let color: Color;
+color = Color.Rojo; // ✅ Correcto
+color = Color.Verde; // ✅ Correcto
+color = Color.Azul; // ✅ Correcto
+color = 'Rojo'; // ❌ Type '"Rojo"' is not assignable to type 'Color'
+
+color = 0; // ✅ Correcto
+color = 1; // ✅ Correcto
+color = 2; // ✅ Correcto
+color = 3; // ❌ Type '3' is not assignable to type 'Color'
+```
+
+> Se le puede asignar un valor numérico a cada elemento del enum, pero si no se especifica, el valor numérico se asigna automáticamente en orden ascendente, comenzando desde cero.
+
+- any: representa cualquier tipo de dato, incluidos los tipos primitivos y los tipos de objetos.
+
+```ts:any.ts
+let edad: any;
+edad = 25; // ✅ Correcto
+edad = 'treinta'; // ✅ Correcto
+edad = true; // ✅ Correcto
+```
+
+> El tipo any es útil cuando no se conoce el tipo de dato que se asignará a una variable o cuando se desea deshabilitar el tipado estático en un fragmento de código. Tener cuidado con el uso del tipo any, ya que puede conducir a errores difíciles de detectar.
+
+#### null y undefined
+
+En TypeScript, los valores null y undefined también tienen sus propios tipos, llamados null y undefined respectivamente. Estos tipos son útiles para representar valores que pueden estar ausentes.
+
+```ts:null.ts
+let nombre: string;
+nombre = null; // ✅ Correcto
+nombre = undefined; // ✅ Correcto
+
+let edad: number;
+edad = null; // ✅ Correcto
+edad = undefined; // ✅ Correcto
+```
+
+## Modificadores de acceso
+
+Los modificadores de acceso en TypeScript permiten controlar la visibilidad y accesibilidad de los miembros de una clase. Aquí tienes una explicación de los tres modificadores de acceso disponibles: public, private y protected.
+
+### public:
+Es el modificador de acceso por defecto en TypeScript. Los miembros marcados como `public` son accesibles desde cualquier lugar, tanto desde dentro de la clase como desde instancias de la clase.
+
+```ts:public.ts
+class Persona {
+  public nombre: string;
+  public edad: number;
+
+  constructor(nombre: string, edad: number) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+}
+
+const persona = new Persona('Juan', 25);
+console.log(persona.nombre); // ✅ Correcto
+console.log(persona.edad); // ✅ Correcto
+```
+### private:
+Los miembros marcados como `private` son accesibles únicamente desde dentro de la clase donde se definen. No se pueden acceder a ellos desde instancias de la clase ni desde clases heredadas.
+
+```ts:private.ts
+class Persona {
+  private nombre: string;
+  public edad: number;
+
+  constructor(nombre: string, edad: number) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+}
+
+const persona = new Persona('Juan', 25);
+console.log(persona.nombre); // ❌ Property 'nombre' is private and only accessible within class 'Persona'
+console.log(persona.edad); // ✅ Correcto
+```
+
+### protected:
+Los miembros marcados como `protected` son accesibles desde dentro de la clase donde se definen y desde clases heredadas. No se pueden acceder a ellos desde instancias de la clase.
+
+```ts:protected.ts
+class User {
+  userId: string = "f2ecb30c-4c85-4a98-9dd7-357f27b7e343";
+  protected password: string = "8MI81Y9zFN%!";
+}
+
+class UserDeveloper extends User {
+  getUserId() {
+    return this.userId;
+  }
+
+  compare(password: string) {
+    this.match(password, this.password);
+  }
+
+  private match(password: string, passwordCipher: string) {
+    return false;
+  }
+}
+
+const userDeveloper = new UserDeveloper();
+console.log(userDeveloper.getUserId());
+console.log(userDeveloper.userId); // ❌ Property 'userId' is protected and only accessible within class 'User' and its subclasses.
+
+const isMatch = userDeveloper.compare("8MI81Y9zFN%!");
+console.log(isMatch); // Output: true
+```
+En este ejemplo, la clase User tiene una propiedad userId y una propiedad protegida password. La clase UserDeveloper hereda de User y puede acceder al miembro protegido userId a través del método getUserId(). Sin embargo, al intentar acceder directamente a userId desde fuera de la clase User y sus subclases, se obtiene un error.
+
+La función compare en UserDeveloper llama a la función privada match, que compara la contraseña proporcionada con la contraseña protegida. En este caso, se devuelve un valor booleano que indica si las contraseñas coinciden.
+
+> Los modificadores de acceso nos permiten establecer los niveles de encapsulamiento adecuados en nuestras clases, protegiendo la integridad y la coherencia de los datos.
+
+## Inmutabilidad
+
+ Se refiere a la incapacidad de modificar un objeto una vez que ha sido creado. En TypeScript, podemos lograr la inmutabilidad de diferentes maneras. Aquí hay algunas técnicas comunes:
+
+ ### Uso de readonly:
+ Al marcar una propiedad como readonly, se impide que se modifique después de la inicialización.
+
+ ```ts:readonly.ts
+class Persona {
+  readonly nombre: string;
+  readonly edad: number;
+
+  constructor(nombre: string, edad: number) {
+    this.nombre = nombre;
+    this.edad = edad;
+  }
+}
+
+const persona = new Persona('Juan', 25);
+persona.nombre = 'Pedro'; // ❌ Cannot assign to 'nombre' because it is a read-only property
+persona.edad = 30; // ❌ Cannot assign to 'edad' because it is a read-only property
+```
+> Es importante tener en cuenta que el modificador readonly solo se aplica a la propiedad en sí, no a su valor. Por ejemplo, si una propiedad es de tipo objeto, el objeto en sí puede modificarse, pero no se puede asignar un nuevo objeto a la propiedad.
+
+```ts:readonly.ts
+class Persona {
+  readonly nombre: string;
+  readonly edad: number;
+  readonly direccion: { calle: string; ciudad: string };
+
+  constructor(nombre: string, edad: number, direccion: { calle: string; ciudad: string }) {
+    this.nombre = nombre;
+    this.edad = edad;
+    this.direccion = direccion;
+  }
+}
+
+const persona = new Persona('Juan', 25, { calle: 'Calle 1', ciudad: 'Ciudad 1' });
+persona.nombre = 'Pedro'; // ❌ Cannot assign to 'nombre' because it is a read-only property
+persona.edad = 30; // ❌ Cannot assign to 'edad' because it is a read-only property
+persona.direccion.calle = 'Calle 2'; // ✅ Correcto
+persona.direccion.ciudad = 'Ciudad 2'; // ✅ Correcto
+persona.direccion = { calle: 'Calle 3', ciudad: 'Ciudad 3' }; // ❌ Cannot assign to 'direccion' because it is a read-only property
+```
+
+### Uso de const
+Al declarar una variable con const, se crea una asignación de solo lectura. Esto es útil para declarar constantes que no deben cambiar.
+
+```ts:const.ts
+const nombre = 'Juan';
+nombre = 'Pedro'; // ❌ Cannot assign to 'nombre' because it is a constant
+```
+
+> const crea una asignación de solo lectura, lo cual impide la reasignación de la variable o constante a un nuevo valor. Para los valores primitivos, el valor en sí es inmutable. En el caso de los objetos, la asignación de solo lectura se aplica a la referencia del objeto, pero las propiedades internas del objeto pueden ser modificadas.
+
+```ts:const.ts
+const persona = {
+  nombre: 'Juan',
+  edad: 25,
+};
+
+persona.nombre = 'Pedro'; // ✅ Correcto
+persona.edad = 30; // ✅ Correcto
+persona = { nombre: 'Pedro', edad: 30 }; // ❌ Cannot assign to 'persona' because it is a constant
+```
+
+
+### Clonación e inmutabilidad:
+En ocasiones, es necesario crear copias inmutables de objetos existentes. Esto se puede lograr mediante técnicas de clonación, como el uso de la función Object.assign() o el operador de propagación (...).
+
+```ts:clonación.ts
+const persona = {
+  nombre: 'Juan',
+  edad: 25,
+  direccion: {
+    calle: 'Calle 1',
+    ciudad: 'Ciudad 1',
+  },
+};
+
+const personaClonada = Object.assign({}, persona);
+personaClonada.nombre = 'Pedro'; // ✅ Correcto
+personaClonada.edad = 30; // ✅ Correcto
+personaClonada.direccion.calle = 'Calle 2'; // ✅ Correcto
+personaClonada.direccion.ciudad = 'Ciudad 2'; // ✅ Correcto
+
+console.log(persona.nombre); // ✅ Correcto
+console.log(persona.edad); // ✅ Correcto
+console.log(persona.direccion.calle); // ✅ Correcto
+console.log(persona.direccion.ciudad); // ✅ Correcto
+```
+
+### Uso de Object.freeze()
+La función Object.freeze() se puede utilizar para crear objetos inmutables. Esto evita que se agreguen, eliminen o modifiquen propiedades de un objeto existente.
+
+```ts:freeze.ts
+const persona = {
+  nombre: 'Juan',
+  edad: 25,
+  direccion: {
+    calle: 'Calle 1',
+    ciudad: 'Ciudad 1',
+  },
+};
+
+Object.freeze(persona);
+persona.nombre = 'Pedro'; // ❌ Cannot assign to 'nombre' because it is a read-only property
+persona.edad = 30; // ❌ Cannot assign to 'edad' because it is a read-only property
+persona.direccion.calle = 'Calle 2'; // ❌ Cannot assign to 'calle' because it is a read-only property
+
+```
+
+
+## Herencia
+
+La herencia es un concepto fundamental en la programación orientada a objetos que permite crear jerarquías de clases, donde las clases hijas heredan propiedades y comportamientos de una clase padre.
+
+En TypeScript, la herencia se logra utilizando la palabra clave extends. Una clase hija hereda los miembros (propiedades y métodos) de la clase padre y puede agregar nuevos miembros o modificar los existentes.
+
+```ts:herencia.ts
+class Animal {
+  nombre: string;
+  constructor(nombre: string) {
+    this.nombre = nombre;
+  }
+
+  saludar() {
+    console.log(`Hola, soy ${this.nombre}.`);
+  }
+}
+
+class Perro extends Animal {
+  raza: string;
+  constructor(nombre: string, raza: string) {
+    super(nombre);
+    this.raza = raza;
+  }
+
+  saludar() {
+    console.log(`¡Guau! Soy ${this.nombre} y soy un perro de raza ${this.raza}.`);
+  }
+
+  ladrar() {
+    console.log("¡Guau! ¡Guau!");
+  }
+}
+
+const miPerro = new Perro("Max", "Labrador");
+miPerro.saludar(); // Output: ¡Guau! Soy Max y soy un perro de raza Labrador.
+miPerro.ladrar(); // Output: ¡Guau! ¡Guau!
+
+const miAnimal = new Animal("Max");
+miAnimal.saludar(); // Output: Hola, soy Max.
+miAnimal.ladrar(); // ❌ Property 'ladrar' does not exist on type 'Animal'.
+```
+En este ejemplo, la clase Animal es la clase padre y define una propiedad nombre y un método saludar(). La clase Perro es la clase hija que extiende de Animal utilizando extends. La clase Perro añade una propiedad raza y sobrescribe el método saludar() para agregar información adicional.
+
+Al crear una instancia de Perro y llamar a los métodos, se puede observar cómo se heredan tanto la propiedad nombre como el método saludar() de la clase Animal. Además, la clase Perro puede agregar su propio método ladrar().
+
+Sin embargo, al crear una instancia de Animal, no se puede acceder al método ladrar(), ya que la clase Animal no tiene este método.
+
+Diagrama de clase de herencia
+
+```
+                +--------------+
+                |   Animal     |
+                +--------------+
+                | - nombre     |
+                +--------------+
+                | + constructor|
+                | + saludar()  |
+                +--------------+
+                       ^
+                       |
+                +--------------+
+                |    Perro     |
+                +--------------+
+                | - raza       |
+                +--------------+
+                | + constructor|
+                | + saludar()  |
+                | + ladrar()   |
+                +--------------+
+```
+#### Super
+La palabra clave super se utiliza para acceder a los miembros de la clase padre desde una clase hija. Se puede utilizar para llamar al constructor de la clase padre o para llamar a los métodos de la clase padre.
+
+> La herencia permite reutilizar código, organizar jerarquías de clases y especializar comportamientos. Las clases hijas pueden acceder a los miembros heredados utilizando `super` y también pueden agregar nuevos miembros propios.
+
+```ts:super.ts
+class Vehiculo {
+  marca: string;
+
+  constructor(marca: string) {
+    this.marca = marca;
+  }
+
+  acelerar() {
+    console.log(`El vehículo de marca ${this.marca} está acelerando.`);
+  }
+}
+
+class Auto extends Vehiculo {
+  modelo: string;
+
+  constructor(marca: string, modelo: string) {
+    super(marca);
+    this.modelo = modelo;
+  }
+
+  acelerar() {
+    super.acelerar(); // Llama al método 'acelerar()' de la clase padre
+    console.log(`El auto de modelo ${this.modelo} también está acelerando.`);
+  }
+}
+
+const miAuto = new Auto("Toyota", "Camry");
+miAuto.acelerar();
+```
+
+En este ejemplo, la clase Vehiculo es la clase padre que tiene una propiedad marca y un método `acelerar()`. La clase Auto es la clase hija que extiende de Vehiculo y agrega una propiedad modelo.
+
+Dentro del constructor de la clase Auto, se utiliza `super(marca)` para llamar al constructor de la clase padre y pasarle el argumento marca. Esto asegura que la propiedad marca de la clase padre se inicialice correctamente.
+
+Luego, en el método `acelerar()` de la clase Auto, se utiliza `super.acelerar()` para llamar al método `acelerar()` de la clase padre. Esto permite ejecutar el código del método de la clase padre y luego agregar la lógica adicional específica de la clase Auto.
+
+Al crear una instancia de Auto y llamar al método `acelerar()`, se verá la salida de ambos mensajes: el mensaje del método `acelerar()` de la clase Vehiculo y el mensaje específico del método `acelerar()` de la clase Auto.
+
+### Herencia múltiple
+
+La herencia múltiple es una característica de la programación orientada a objetos que permite que una clase herede de múltiples clases. En TypeScript, la herencia múltiple se logra utilizando la palabra clave implements.
+
+```ts:herencia-multiple.ts
+class Animal {
+  nombre: string;
+  constructor(nombre: string) {
+    this.nombre = nombre;
+  }
+
+  saludar() {
+    console.log(`Hola, soy ${this.nombre}.`);
+  }
+}
+
+class Mascota {
+  dueno: string;
+  constructor(dueno: string) {
+    this.dueno = dueno;
+  }
+
+  mostrarDueno() {
+    console.log(`Mi dueño es ${this.dueno}.`);
+  }
+}
+
+class Perro implements Animal, Mascota {
+  nombre: string;
+  dueno: string;
+  constructor(nombre: string, dueno: string) {
+    this.nombre = nombre;
+    this.dueno = dueno;
+  }
+
+  saludar() {
+    console.log(`¡Guau! Soy ${this.nombre} y mi dueño es ${this.dueno}.`);
+  }
+
+  mostrarDueno() {
+    console.log(`Mi dueño es ${this.dueno}.`);
+  }
+
+  ladrar() {
+    console.log("¡Guau! ¡Guau!");
+  }
+}
+
+const miPerro = new Perro("Max", "Juan");
+miPerro.saludar(); // Output: ¡Guau! Soy Max y mi dueño es Juan.
+miPerro.mostrarDueno(); // Output: Mi dueño es Juan.
+miPerro.ladrar(); // Output: ¡Guau! ¡Guau!
+```
+
+
+
+
+
+
+
