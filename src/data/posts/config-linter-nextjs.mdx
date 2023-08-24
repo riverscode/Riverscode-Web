@@ -1,0 +1,74 @@
+---
+title: "Configurar Linter con Next.js 13"
+summary: "Configurar Linter con Next.js 13 y Eslint utilizando Standard"
+cover: "https://res.cloudinary.com/lambda-ingenier-a-e-innovaci-n/image/upload/v1665983632/blog-Riverscode/Asincronismo-portada_dp7jbz.png"
+author: "Rivers Code"
+publishedAt: "2023-08-24"
+image: "eslint.webp"
+tags:
+  - "🙃 Next.js"
+references:
+  link: "https://www.youtube.com/watch?v=bMknfKXIFA8"
+status: "ready"
+---
+
+### Iniciar un proyecto con Eslint
+
+```bash
+npx eslint --init
+```
+
+```
+? How would you like to use ESLint?
+✔ To check syntax, find problems, and enforce code style
+
+? What type of modules does your project use?
+✔ JavaScript modules (import/export)
+
+? Which framework does your project use?
+✔ React
+
+? Does your project use TypeScript?
+✔ Yes
+
+? Where does your code run?
+✔ Browser
+✔ Node
+
+? How would you like to define a style for your project?
+✔ Use a popular style guide
+
+? Which style guide do you want to follow?
+✔ Standard
+
+? What format do you want your config file to be in?
+✔ JSON
+
+? Would you like to install them now?
+✔ Yes
+
+? Which package manager do you want to use?
+✔ npm
+```
+
+### Desactivar reglas
+
+En el archivo eslintrc.json en el apartado de reglas desactivas las siguientes reglas
+
+```json
+"rules": [
+  "react/prop-types": "off",
+  "react/react-in-jsx-scope": "off",
+  "typescript-eslint/no-floating-promises": "off",
+  "typescript-eslint/explicit-function-return-type": "off",
+  "typescript-eslint/no-misused-promises": "off",
+]
+```
+
+### Agregar el proyecto al parserOptions
+
+```json
+"parserOptions": {
+  "project": "./tsconfig.json"
+}
+```
